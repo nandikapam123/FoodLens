@@ -1,0 +1,15 @@
+                    VStack{
+                        Text("♥ Our Mission ♥")
+                            .foregroundStyle(Theme.lightGreen)
+                            .font(.title)
+                            .padding(.top, 20)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            
+                        
+                        Text("FoodLens empowers communities to overcome food insecurity through technology. By combining AI recipe generation, ingredient scanning, and real-time resource mapping, we bridge the gap between people and \nthe nutritious food they need to thrive.")
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 190)   // <-- add this
+                            .padding(.bottom, 30)
+                    }
+                    .background(Theme.lightGreen.opacity(0.3))
