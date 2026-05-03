@@ -1,16 +1,14 @@
 //
 //  ScannerView.swift
-//  Savaura
 //
 
-
-
 import SwiftUI
-import UIKit
 import AVFoundation
 struct ScannerView: View {
     
-    @StateObject var user = UserSession()
+    @Environment(\.userSession) var user
+    
+    @State private var showTip = true
     
     @State private var showPicker = false
     @State private var capturedImage: UIImage?
@@ -30,10 +28,11 @@ struct ScannerView: View {
                 
                 VStack(spacing: 28) {
                     titleView
+                        .padding(.bottom, -20)
+                        .padding(.top, 10)
                     scanControlsBox
                     if capturedImage != nil { resultsBox }
-                    instructionsBox
-                    tipBox
+                    if showTip {tipBox}
                     Spacer()
                 }
             }
@@ -45,20 +44,16 @@ struct ScannerView: View {
             }
         }
     }
-    
-    // MARK: - Subviews
-    
+        
     private var titleView: some View {
-        Text("Food Scanner")
-            .font(.largeTitle)
-            .bold()
-            .foregroundColor(Theme.primaryGreen)
-            .shadow(color: Theme.glowGreen.opacity(0.5), radius: 8)
-            .padding(.top)
+        PageHeader(
+            title: "Food Scanner",
+            subtitle: "Take a photo of any ingredient label and instantly find out if it fits your dietary needs, from gluten-free to halal."
+        )
     }
     
     private var scanControlsBox: some View {
-        VStack(spacing: 18) {
+        DarkCard{
             Text("Select Category to Scan For")
                 .font(.headline)
                 .foregroundColor(Theme.primaryGreen)
@@ -67,12 +62,6 @@ struct ScannerView: View {
             scanButton
         }
         .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Theme.lightGreen.opacity(0.15))
-                .shadow(color: Theme.glowGreen.opacity(0.3), radius: 8, x: 0, y: 3)
-        )
-        .padding(.horizontal)
     }
     
     private var categoryPicker: some View {
@@ -128,28 +117,29 @@ struct ScannerView: View {
     }
     
     private var resultsBox: some View {
-        VStack(spacing: 15) {
+        DarkCard{
             resultStatus
             ingredientsList
+            
         }
         .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.black.opacity(0.2))
-                .shadow(color: Theme.glowGreen.opacity(0.3), radius: 8, x: 0, y: 3)
-        )
-        .padding(.horizontal)
+        .padding(.top, -30)
     }
     
     private var resultStatus: some View {
         HStack(alignment: .top) {
             if detectedMatches.isEmpty {
-                Text("✅ Food is \(selectedCategory.rawValue.capitalized)")
+                Image(systemName: "checkmark.circle.fill")
+                    .padding(10)
+                    .foregroundColor(Theme.primaryGreen)
+                    .font(.system(size: 30))
+
+                
+                Text("Food is \(selectedCategory.rawValue.capitalized)")
                     .font(.headline)
                     .foregroundColor(Theme.primaryGreen)
                     .bold()
                     .padding(10)
-                    .background(Color.black.opacity(0.25))
                     .cornerRadius(12)
             } else {
                 VStack(spacing: 6) {
@@ -224,20 +214,55 @@ struct ScannerView: View {
                     .fill(Theme.lightGreen.opacity(0.35))
             )
             .padding(.horizontal)
+            .padding(.top, -25)
     }
     
     private var tipBox: some View {
-        Text("💡 Tip: Use good lighting and a clear image of the ingredient label. *Scanner may make mistakes.")
-            .font(.system(size: 14))
-            .foregroundColor(.white)
+        
+//        HStack{
+//            Image(systemName: "lightbulb")
+//                .foregroundColor(Theme.primaryGreen)
+//                .padding()
+//                .font(Font.system(size: 30))
+//            
+//            Spacer()
+//                            
+//            Text("Tip: Use good lighting and a clear image of the ingredient label. *Scanner may make mistakes.")
+//            
+//                .font(.subheadline)
+//                .foregroundColor(.white.opacity(0.5))
+//                .fixedSize(horizontal: false, vertical: true)
+//                .padding()
+//        }
+            HStack {
+                Image(systemName: "lightbulb.fill")
+                    .foregroundColor(Theme.primaryGreen)
+                    .font(.system(size: 22))
+                    
+
+                Text("Use good lighting and a clear image of the ingredient label. The scanner may make mistakes.")
+                    .font(.subheadline)
+                    .foregroundColor(.white.opacity(0.7))
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                Spacer()
+
+                Button(action: {
+                    showTip = false
+                }) {
+                    Image(systemName: "xmark")
+                        .foregroundColor(.white.opacity(0.4))
+                }
+            }
             .padding()
-            .multilineTextAlignment(.center)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(
-                RoundedRectangle(cornerRadius: 14)
-                    .fill(Color.black.opacity(0.35))
-            )
             .padding(.horizontal)
+            .background(Color.white.opacity(0.05))
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.white.opacity(0.08), lineWidth: 1)
+            )
+        
     }
     
     // MARK: - Functions
@@ -307,7 +332,5 @@ struct ScannerView: View {
 }
 
 #Preview{
-    ScannerView(
-        user: UserSession()
-    )
+    ScannerView()
 }

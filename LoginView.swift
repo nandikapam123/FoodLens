@@ -1,20 +1,26 @@
 //
 //  LoginView.swift
-//  Savaura
 //
+
+// OLD LOGIN VIEWWWWW, NOW USING ONBOARDING VIEEWWWWW
 
 import SwiftUI
 import Combine
 struct LoginView: View {
     
+    @Environment(\.modelContext) private var context
     @Binding var isLoggedIn: Bool
-    @ObservedObject var user: UserSession
+    @Environment(\.userSession) var user
     @State private var selectedAccount = "Basic"
     let accountTypes = ["Basic", "Premium"]
     
     @State private var nameInput = ""
     @State private var usernameInput = ""
     @State private var preferencesInput = ""
+    
+    @FocusState private var focusedName: String?
+    @FocusState private var focusedUsername: String?
+    @FocusState private var focusedPreferences: String?
     
     @State private var isButtonPressed = false
     
@@ -33,21 +39,95 @@ struct LoginView: View {
                     VStack(spacing: 25) {
                         
                         Text("Welcome to Food Lens")
-                            .font(.largeTitle)
+                            .font(.system(size: 34, weight: .bold, design: .rounded))
                             .bold()
                             .foregroundColor(Theme.primaryGreen)
                             .shadow(color: Theme.glowGreen.opacity(0.5), radius: 5)
                         
                         Group {
                             TextField("Name", text: $nameInput)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Theme.lightGreen.opacity(0.25))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(
+                                                    focusedName == "name"
+                                                    ? Theme.primaryGreen
+                                                    : Theme.primaryGreen.opacity(0.3),
+                                                    lineWidth: 2
+                                                )
+                                        )
+                                        .shadow(
+                                            color: focusedName == "name"
+                                            ? Theme.primaryGreen.opacity(0.8)
+                                            : .clear,
+                                            radius: 10
+                                        )
+                                )
+                                .foregroundColor(.white)
+                                .tint(Theme.primaryGreen)
+                                .focused($focusedName, equals: "name")
+                                .padding(.horizontal)
+                                .textContentType(.name)
+
+                            
                             TextField("Username", text: $usernameInput)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Theme.lightGreen.opacity(0.25))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(
+                                                    focusedUsername == "username"
+                                                    ? Theme.primaryGreen
+                                                    : Theme.primaryGreen.opacity(0.3),
+                                                    lineWidth: 2
+                                                )
+                                        )
+                                        .shadow(
+                                            color: focusedUsername == "username"
+                                            ? Theme.primaryGreen.opacity(0.8)
+                                            : .clear,
+                                            radius: 10
+                                        )
+                                )
+                                .foregroundColor(.white)
+                                .tint(Theme.primaryGreen)
+                                .focused($focusedUsername, equals: "username")
+                                .padding(.horizontal)
+                                .textContentType(.username)
+                                .autocapitalization(.none)
+                            
+                            
                             TextField("Food Preferences (comma-separated)", text: $preferencesInput)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Theme.lightGreen.opacity(0.25))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(
+                                                    focusedPreferences == "preferences"
+                                                    ? Theme.primaryGreen
+                                                    : Theme.primaryGreen.opacity(0.3),
+                                                    lineWidth: 2
+                                                )
+                                        )
+                                        .shadow(
+                                            color: focusedPreferences == "preferences"
+                                            ? Theme.primaryGreen.opacity(0.8)
+                                            : .clear,
+                                            radius: 10
+                                        )
+                                )
+                                .foregroundColor(.white)
+                                .tint(Theme.primaryGreen)
+                                .focused($focusedPreferences, equals: "preferences")
+                                .padding(.horizontal)
                         }
-                        .padding()
-                        .background(Theme.lightGreen.opacity(0.9))
-                        .foregroundColor(Theme.backColor)
-                        .cornerRadius(12)
-                        .padding(.horizontal)
                         
                         VStack(alignment: .leading) {
                             Text("Choose Account Type")
@@ -72,7 +152,10 @@ struct LoginView: View {
                             user.username = usernameInput
                             user.preferences = preferencesInput
                             user.accountType = selectedAccount
+                            
+                            user.selectedTab = .contentView
                             isLoggedIn = true
+                            
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -88,6 +171,8 @@ struct LoginView: View {
                                 .onChanged { _ in isButtonPressed = true }
                                 .onEnded { _ in isButtonPressed = false }
                         )
+                        .disabled(nameInput.isEmpty || usernameInput.isEmpty)
+                        .opacity(nameInput.isEmpty || usernameInput.isEmpty ? 0.6 : 1)
                         
                         Spacer()
                     }
@@ -100,12 +185,6 @@ struct LoginView: View {
 }
 
 
-#Preview {
-    LoginView(
-        isLoggedIn: .constant(false),
-        user: UserSession()
-    )
-}
 
 
 

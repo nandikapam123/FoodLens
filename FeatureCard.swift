@@ -1,6 +1,5 @@
 //
 //  FeatureCard.swift
-//  Savaura
 //
 
 import SwiftUI
@@ -46,5 +45,8 @@ struct FeatureCard: View {
     }
 }
 
+#Preview{
+    FeatureCard(title: "Name", description: "Description", isPremium: true, isUnlocked: false)
+}
 
 

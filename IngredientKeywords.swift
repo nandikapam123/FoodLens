@@ -1,6 +1,6 @@
 //
 //  IngredientKeywords.swift
-//  Savaura
+//
 
 import SwiftUI
 import Foundation

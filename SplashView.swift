@@ -1,13 +1,12 @@
 //
 //  SplashView.swift
-//  Savaura
 //
 
 import SwiftUI
 import Combine
 struct SplashView: View {
     
-    @ObservedObject var user: UserSession
+    @Environment(\.userSession) var user
     @AppStorage("isLoggedIn") var isLoggedIn = false
     
     @State private var slogan: String = "Eat healthy, live happy!"
@@ -35,7 +34,7 @@ struct SplashView: View {
                     
                     // Food Lens with glowing effect
                     Section{
-                        Text("OpenPlate")
+                        Text("FoodLens")
                             .font(.system(size: 52, weight: .bold))
                             .foregroundColor(Theme.primaryGreen)
                             .shadow(color: Theme.glowGreen, radius: 15, x: 0, y: 0)
@@ -51,13 +50,12 @@ struct SplashView: View {
                     }
                     
                     // Navigation button with gradient & glow
-                    NavigationLink(destination: LoginView(isLoggedIn: $isLoggedIn, user: user)) {
+                    NavigationLink(destination: OnboardingView(isLoggedIn: $isLoggedIn)) {
                         Text("Get Started")
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(Theme.backColor)
                             .padding(.vertical, 10)
-//                            .frame(maxWidth: .infinity)
                             .padding(.horizontal, 120)
                             .background(
                                 Theme.greenGradient
@@ -84,7 +82,5 @@ struct SplashView: View {
 }
 
 #Preview{
-    SplashView(
-        user : UserSession()
-    )
+    SplashView()
 }

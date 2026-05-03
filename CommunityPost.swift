@@ -1,6 +1,5 @@
 //
 //  CommunityPost.swift
-//  Savaura
 //
 
 import SwiftUI
@@ -24,8 +23,11 @@ struct CommunityPost: Identifiable {
     let driveLocation: String
     let missionDescription: String
     let storeLocation: String
-    let dicountDetails: String
+    let discountDetails: String
     let postedByPremium: Bool
 }
+
+
+
 
 

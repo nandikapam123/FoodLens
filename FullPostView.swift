@@ -1,6 +1,5 @@
 //
 //  FullPostView.swift
-//  Savaura
 //
 
 import SwiftUI
@@ -16,25 +15,7 @@ struct FullPostView: View {
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 26) {
-                    
-                    Spacer().frame(height: 20)
-                    
-                    // SPONSORED BADGE
-                    if post.type == .advertisement {
-                        HStack {
-                            Spacer()
-                            Text("SPONSORED")
-                                .font(.caption.bold())
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 5)
-                                .background(Theme.greenGradient)
-                                .foregroundColor(Theme.backColor)
-                                .cornerRadius(6)
-                        }
-                    }
-                    
-                    // HEADER
-                    VStack(alignment: .leading, spacing: 12) {
+                    HStack{
                         
                         Text(post.type.rawValue.uppercased())
                             .font(.caption2.bold())
@@ -44,6 +25,52 @@ struct FullPostView: View {
                             .background(Theme.primaryGreen.opacity(0.2))
                             .foregroundColor(Theme.primaryGreen)
                             .clipShape(Capsule())
+                        
+                        
+                        if post.type == .advertisement {
+                            Text("SPONSORED")
+                                .font(.caption.bold())
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 3)
+                                .background(Theme.greenGradient)
+                                .foregroundColor(Theme.backColor)
+                                .cornerRadius(6)
+                        }
+                        if post.type == .advertisement {
+                            Spacer().frame(maxWidth: 68)
+                            
+                            Button (action: {dismiss() } ){
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 14, weight: .bold))
+                                    .foregroundColor(Theme.primaryGreen)
+                                    .padding(.horizontal, 14)
+                                    .padding(.vertical, 8)
+                                    .background(Color.black.opacity(0.3))
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Theme.primaryGreen.opacity(0.4), lineWidth: 1))
+                            }
+                          
+                        } else {
+                            
+                            Button (action: {dismiss() } ){
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 14, weight: .bold))
+                                    .foregroundColor(Theme.primaryGreen)
+                                    .padding(9)
+                                    .background(Color.black.opacity(0.3))
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Theme.primaryGreen.opacity(0.4), lineWidth: 1))
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                            
+                        }
+                        
+                    }
+                    .padding(.top, 40)
+                    .padding(.bottom, -20)
+                    
+                    
+                    VStack(alignment: .leading, spacing: 12) {
                         
                         Text(post.title)
                             .font(.system(.largeTitle).bold())
@@ -58,21 +85,18 @@ struct FullPostView: View {
                             }
                         }
                     }
-                    .padding(.top, 60)
                     
-                    //IMAGE
                     if let image = post.image {
                         Image(uiImage: image)
                             .resizable()
                             .scaledToFill()
                             .frame(height: 220)
-                            .frame(maxWidth: .infinity)
+                            .frame(maxWidth: 370)
                             .clipped()
                             .cornerRadius(18)
                             .shadow(color: Theme.primaryGreen.opacity(0.4), radius: 10)
                     }
                     
-                    // DESCRIPTION
                     ContentCard(title: "Description", systemImage: "text.alignleft") {
                         Text(post.description)
                             .lineSpacing(4)
@@ -156,36 +180,18 @@ struct FullPostView: View {
                             }
                         }
                         
-                        if !post.dicountDetails.isEmpty {
+                        if !post.discountDetails.isEmpty {
                             ContentCard(title: "Promotion Details", systemImage: "tag.fill") {
-                                Text(post.dicountDetails)
+                                Text(post.discountDetails)
                                     .foregroundColor(.white.opacity(0.9))
                             }
                         }
                     }
                     
-                    Spacer(minLength: 60)
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 40)
             }
-            
-            // BACK BUTTON
-            Button(action: { dismiss() }) {
-                HStack(spacing: 6) {
-                    Image(systemName: "chevron.left")
-                    Text("Back")
-                        .fontWeight(.semibold)
-                }
-                .foregroundColor(Theme.backColor)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 10)
-                .background(Theme.greenGradient)
-                .clipShape(Capsule())
-                .shadow(color: Theme.primaryGreen.opacity(0.6), radius: 8)
-            }
-            .padding(.leading, 20)
-            .padding(.top, 50)
         }
     }
 }
@@ -213,19 +219,13 @@ struct ContentCard<Content: View>: View {
         .padding(22)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
-            RoundedRectangle(cornerRadius: 24)
-                .fill(Theme.lightGreen.opacity(0.25))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 24)
-                        .stroke(Theme.lightGreen.opacity(0.4), lineWidth: 1)
-                )
-                .shadow(
-                    color: Theme.primaryGreen.opacity(0.35),
-                    radius: 14
-                )
+            ZStack {
+                RoundedRectangle(cornerRadius: 22).fill(Color(.black.opacity(0.3)))
+                RoundedRectangle(cornerRadius: 22).fill(Theme.lightGreen.opacity(0.10))
+                RoundedRectangle(cornerRadius: 22)
+                    .stroke(Theme.lightGreen.opacity(0.35), lineWidth: 1)
+            }
         )
+        .shadow(color: Theme.glowGreen.opacity(0.25), radius: 12)
     }
 }
-
-
-

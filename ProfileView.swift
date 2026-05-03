@@ -1,12 +1,11 @@
 //
 //  ProfileView.swift
-//  Savaura
 //
 
 import SwiftUI
 struct ProfileView: View {
     @AppStorage("isLoggedIn") var isLoggedIn = false
-    @StateObject var user = UserSession()
+    @Environment(\.userSession) var user
     
     @State private var showPreferencesEditor = false
     
@@ -18,7 +17,7 @@ struct ProfileView: View {
                 
                 ScrollView {
                     VStack(spacing: 30) {
-                        
+                        Spacer()
                         
                         // Navigation Header as Text Box
                         Text("Profile")
@@ -105,6 +104,8 @@ struct ProfileView: View {
                         // 4. Logout Button
                         Button(role: .destructive) {
                             isLoggedIn = false
+                            
+                            
                         } label: {
                             Label("Sign Out", systemImage: "rectangle.portrait.and.arrow.right")
                                 .bold()
@@ -144,7 +145,7 @@ struct InfoRow: View {
 }
 // MARK: - Example Preferences Editor
 struct PreferencesEditorView: View {
-    @ObservedObject var user: UserSession
+    @State var user: UserSession
     @Environment(\.dismiss) var dismiss
     @State private var tempPreferences: String = ""
     
@@ -193,8 +194,7 @@ struct PreferencesEditorView: View {
 
 #Preview{
     ProfileView(
-        isLoggedIn: false,
-        user: UserSession()
+        isLoggedIn: false
     )
 }
 

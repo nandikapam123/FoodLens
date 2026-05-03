@@ -1,6 +1,5 @@
 //
 //  MapData.swift
-//  Savaura
 //
 
 import Foundation

@@ -1,3 +1,6 @@
+//
+// IngredientCategory.swift
+//
 
 import Foundation
 enum IngredientCategory: String, CaseIterable {

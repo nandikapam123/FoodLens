@@ -1,25 +1,21 @@
 //
 //  CameraOrPhotoPicker.swift
-//  Savaura
-//
-//  Created by Prasadu Pampana on 3/11/26.
 //
 
 import SwiftUI
-import UIKit
 struct CameraOrPhotoPicker: UIViewControllerRepresentable {
     
     var completion: (UIImage) -> Void
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let picker = UIImagePickerController()
-#if targetEnvironment(macCatalyst)
-        picker.sourceType = .photoLibrary
-#else
-        picker.sourceType = UIImagePickerController.isSourceTypeAvailable(.camera) ? .camera : .photoLibrary
-#endif
-        picker.delegate = context.coordinator
-        return picker
+        #if targetEnvironment(simulator)
+                picker.sourceType = .photoLibrary
+        #else
+                picker.sourceType = UIImagePickerController.isSourceTypeAvailable(.camera) ? .camera : .photoLibrary
+        #endif
+                picker.delegate = context.coordinator
+                return picker
     }
     
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}

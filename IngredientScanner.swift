@@ -1,10 +1,8 @@
 //
 //  IngredientScanner.swift
-//  Savaura
 //
 
 import SwiftUI
-import UIKit
 import Vision
 struct IngredientScanner {
     

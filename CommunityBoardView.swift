@@ -1,13 +1,12 @@
 //
 //  CommunityBoardView.swift
-//  Savaura
 //
 
 import SwiftUI
-import UIKit
 struct CommunityBoardView: View {
     
-    @StateObject var user: UserSession
+    @Environment(\.userSession) var user
+    
     @State private var posts: [CommunityPost] = [
         CommunityPost(
             type: .recipe,
@@ -21,7 +20,7 @@ struct CommunityBoardView: View {
             driveLocation: "",
             missionDescription: "",
             storeLocation: "",
-            dicountDetails: "",
+            discountDetails: "",
             postedByPremium: true
         ),
         CommunityPost(
@@ -36,7 +35,7 @@ struct CommunityBoardView: View {
             driveLocation: "123 Anytown Food Bank",
             missionDescription: "Togther we can makes sure every child has access to consistent, nutrious food!",
             storeLocation: "",
-            dicountDetails: "",
+            discountDetails: "",
             postedByPremium: true
         ),
         CommunityPost(
@@ -51,63 +50,166 @@ struct CommunityBoardView: View {
             driveLocation: "",
             missionDescription: "",
             storeLocation: "456 BestTown Street",
-            dicountDetails: "Only at select stores Green Grocery is offering 20% off all fruits this weekend to encourage fresh, healthy eating for the whole community.",
+            discountDetails: "Only at select stores Green Grocery is offering 20% off all fruits this weekend to encourage fresh, healthy eating for the whole community.",
             postedByPremium: true
-        ),
+        )
     ]
     
     @State private var showNewPost = false
     @State private var selectedPost: CommunityPost?
+    @State private var dontShowNewPost = false
     
     var body: some View {
         NavigationStack {
-            VStack {
-                // Header
-                HStack {
-                    Text("Community Board")
-                        .font(.largeTitle)
-                        .bold()
-                        .foregroundColor(Theme.primaryGreen)
-                        .shadow(color: Theme.glowGreen.opacity(0.5), radius: 8)
-                    Spacer()
+            ZStack{
+                VStack {
+                    // Old STUFFFFF
+//                    HStack{
+//                        if user.accountType == "Premium" {
+//                            Button(action: { showNewPost = true }) {
+//                                Image(systemName: "plus.circle.fill")
+//                                    .font(.title)
+//                                    .foregroundColor(Theme.primaryGreen)
+//                                    .shadow(color: Theme.glowGreen.opacity(0.5), radius: 4)
+//                            }
+//                        }
+//                    }
+                    // Header
+//                    HStack {
+//                        Text("Community Board")
+//                            .font(.largeTitle)
+//                            .bold()
+//                            .foregroundColor(Theme.primaryGreen)
+//                            .shadow(color: Theme.glowGreen.opacity(0.5), radius: 8)
+//                        
+//                        Spacer()
+//
+//                            if user.accountType == "Premium" {
+//                                Button { showNewPost = true } label: {
+//                                    Image(systemName: "square.and.pencil")
+//                                        .font(.system(size: 16, weight: .semibold))
+//                                        .foregroundColor(Theme.primaryGreen)
+//                                        .padding(9)
+//                                        .background(Theme.lightGreen.opacity(0.15))
+//                                        .cornerRadius(10)
+//                                        .overlay(
+//                                            RoundedRectangle(cornerRadius: 10)
+//                                                .stroke(Theme.primaryGreen.opacity(0.4), lineWidth: 1)
+//                                        )
+//                                }
+//                            }
+                        
+//                        if user.accountType == "Premium" {
+//                            Button { showNewPost = true } label: {
+//                                Image(systemName: "plus")
+//                                    .font(.system(size: 14, weight: .bold))
+//                                    .foregroundColor(Theme.primaryGreen)
+//                                    .padding(9)
+//                                    .background(Color(.black.opacity(0.3)))
+//                                    .clipShape(Circle())
+//                                    .overlay(Circle().stroke(Theme.primaryGreen.opacity(0.4),lineWidth: 1))
+//                            }
+//                        }
+//                        
+//                    }
+//                    .padding(.top, -3)
+//                    .padding(.horizontal)
+//                    .padding(.bottom, -10)
                     
-                    if user.accountType == "Premium" {
-                        Button(action: { showNewPost = true }) {
-                            Image(systemName: "plus.circle.fill")
-                                .font(.title)
+                    // Header #2
+                    ZStack(alignment: .topTrailing) {
+                        PageHeader(
+                            title: "Community",
+                            subtitle: "Browse recipes, local food drives, and store promotions shared by people in your community"
+                        )
+                        .padding(.top, -10)
+                        .padding(.bottom, 10)
+
+                        Button {
+                            if user.accountType == "Premium"{
+                                showNewPost = true
+                            }
+                            
+                            else{
+                                dontShowNewPost = true
+                            }
+                        } label: {
+                            Image(systemName: "plus")
+                                .font(.system(size: 14, weight: .bold))
                                 .foregroundColor(Theme.primaryGreen)
-                                .shadow(color: Theme.glowGreen.opacity(0.5), radius: 4)
+                                .padding(9)
+                                .background(Color.black.opacity(0.3))
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Theme.primaryGreen.opacity(0.4), lineWidth: 1))
+                        }
+                        .padding(.trailing, 20)
+                        .padding(.top, 8)
+                        
+                    }
+                    
+                    // Posts List
+                    ScrollView {
+                        VStack(spacing: 16) {
+                            ForEach(posts, id: \.id) { post in
+                                CommunityPostRow(post: post, selectedPost: $selectedPost)
+                            }
                         }
                     }
                 }
-                .padding(.horizontal)
-                .padding(.top)
+                .background(Image("SplashPic").overlay(Theme.backColor.opacity(0.7)))
+                .padding(.vertical)
                 
-                // Posts List
-                ScrollView {
-                    VStack(spacing: 16) {
-                        ForEach(posts, id: \.id) { post in
-                            CommunityPostRow(post: post, selectedPost: $selectedPost)
-                        }
+                // New Post Sheet
+                .sheet(isPresented: $showNewPost) {
+                    NewCommunityPostView() { newPost in
+                        posts.insert(newPost, at: 0)
+                        showNewPost = false
                     }
-                    .padding(.vertical, 8)
                 }
-            }
-            .background(Image("SplashPic").overlay(Theme.backColor.opacity(0.7)))
-            .padding(.vertical)
-            
-            // New Post Sheet
-            .sheet(isPresented: $showNewPost) {
-                NewCommunityPostView(user: user) { newPost in
-                    posts.insert(newPost, at: 0)
-                    showNewPost = false
+                .sheet(isPresented: $dontShowNewPost) {
+                    LockedPremiumView(feature: "New Post", description: "Share recipes, food drives, and store promotions with your community", image: "Locked2")
                 }
+                // Full Post Sheet
+                .sheet(item: $selectedPost) { post in
+                    FullPostView(post: post)
+                }
+                
+                // MORE OLD STUFFFF
+                
+//                if user.accountType == "Premium" {
+//                        VStack {
+//                            Spacer()
+//                            HStack {
+//                                Spacer()
+//                                Button(action: { showNewPost = true }) {
+//                                    Image(systemName: "plus")
+//                                        .font(.title2.bold())
+//                                        .foregroundColor(Theme.backColor)
+//                                        .padding()
+//                                        .background(Theme.primaryGreen)
+//                                        .clipShape(Circle())
+//                                        .shadow(color: Theme.glowGreen.opacity(0.6), radius: 8)
+//                                }
+//                                .padding()
+//                            }
+//                        }
+//                }
             }
-            
-            // Full Post Sheet
-            .sheet(item: $selectedPost) { post in
-                FullPostView(post: post)
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    if user.accountType == "Premium" {
+//                        Button { showNewPost = true } label: {
+//                            Image(systemName: "plus")
+//                                .font(.system(size: 14, weight: .bold))
+//                                .foregroundColor(Theme.primaryGreen)
+//                                .padding(9)
+//                                .background(.ultraThinMaterial)
+//                                .clipShape(Circle())
+//                                .overlay(Circle().stroke(Theme.primaryGreen.opacity(0.4),lineWidth: 1))
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 }
@@ -120,6 +222,7 @@ struct CommunityPostRow: View {
     @State private var isButtonPressed = false
     
     var body: some View {
+        
         VStack(alignment: .leading, spacing: 8) {
             
             // Post Type Badge
@@ -130,7 +233,7 @@ struct CommunityPostRow: View {
                         .font(.caption2)
                         .bold()
                         .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
+                        .padding(.vertical, 6)
                         .background(Theme.greenGradient.overlay(Theme.backColor.opacity(0.4)))
                         .foregroundColor(Theme.lightGreen)
                         .cornerRadius(6)
@@ -139,7 +242,11 @@ struct CommunityPostRow: View {
                 Text(post.type.rawValue)
                     .font(.caption)
                     .bold()
+                
+                //Positioning
                     .padding(6)
+                
+                //Color
                     .background(Color.white.opacity(0.85))
                     .foregroundColor(.black)
                     .cornerRadius(6)
@@ -156,7 +263,6 @@ struct CommunityPostRow: View {
                 .foregroundColor(.black)
                 .lineLimit(2)
             
-            // Post Actions
             // Post Actions
             if post.type == .recipe {
                 Button {
@@ -240,7 +346,7 @@ struct CommunityPostRow: View {
 
 
 #Preview{
-    CommunityBoardView(user: UserSession())
+    CommunityBoardView()
 }
 
 
