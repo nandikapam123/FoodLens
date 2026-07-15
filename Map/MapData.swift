@@ -706,6 +706,1336 @@ let pantryLocations: [PantryLocation] = [
         hours: "Mon–Thu: 5 PM–10 PM; Fri–Sun: hours vary",
         coordinate: CLLocationCoordinate2D(latitude: 30.2699, longitude: -97.7425)
     )
-    
+
+    PantryLocation(
+        name: "H-E-B Leander (Hero Way)",
+        type: "grocery",
+        address: "19348 Ronald Reagan Blvd, Leander, TX 78641",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.6302, longitude: -97.7915)
+    ),
+    PantryLocation(
+        name: "Hill Country Community Ministries (Pflugerville)",
+        type: "pantry",
+        address: "15822 Foothill Farms Loop, Pflugerville, TX 78660",
+        hours: "Tue: 1 PM - 4 PM, Thu: 9 AM - 12 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4382, longitude: -97.6491)
+    ),
+    PantryLocation(
+            name: "Arlan's Market Georgetown",
+            type: "grocery",
+            address: "1108 S Main St, Georgetown, TX 78626",
+            hours: "Mon–Sun: 7 AM – 10 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.6279, longitude: -97.6773)
+    ),
+    PantryLocation(
+            name: "Rebel Cheese",
+            type: "vegan",
+            address: "2200 Aldrich St Suite 120, Austin, TX 78723",
+            hours: "Mon–Sun: 9 AM – 9 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.2991, longitude: -97.7056)
+        ),
+        PantryLocation(
+            name: "The Halal Corner",
+            type: "halal",
+            address: "1200 W 26th St, Austin, TX 78705",
+            hours: "Mon–Sun: 11 AM – 10 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.2917, longitude: -97.7468)
+        ),
+        PantryLocation(
+            name: "Wild Wood Bakehouse",
+            type: "Gluten-Free",
+            address: "3016 Guadalupe St, Austin, TX 78705",
+            hours: "Tue–Sat: 11 AM – 9 PM, Sun: 10 AM – 3 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.2974, longitude: -97.7417)
+        ),
+        PantryLocation(
+            name: "Caritas of Austin Food Pantry",
+            type: "pantry",
+            address: "611 Neches St, Austin, TX 78701",
+            hours: "Mon–Thu: 8 AM – 4 PM, Fri: 8 AM – 11:30 AM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.2679, longitude: -97.7371)
+        ),
+        PantryLocation(
+            name: "H-E-B Georgetown (S I-35)",
+            type: "grocery",
+            address: "1101 W University Ave, Georgetown, TX 78628",
+            hours: "Mon–Sun: 6 AM – 11 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.6359, longitude: -97.6914)
+        ),
+        PantryLocation(
+            name: "Pflugerville Community Food Pantry",
+            type: "pantry",
+            address: "14401 Immanuel Rd, Pflugerville, TX 78660",
+            hours: "Tue: 1:30 PM - 3:30 PM, Sat: 9 AM - 11 AM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.4571, longitude: -97.6189)
+        ),
+        PantryLocation(
+            name: "Dear Diary Coffee",
+            type: "vegan",
+            address: "1212 Chicon St #103, Austin, TX 78702",
+            hours: "Mon–Sun: 7 AM – 6 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.2694, longitude: -97.7169)
+        ),
+        PantryLocation(
+            name: "Halal Bros",
+            type: "halal",
+            address: "2712 Guadalupe St, Austin, TX 78705",
+            hours: "Mon–Sun: 11 AM – 11 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.2929, longitude: -97.7424)
+        ),
+        PantryLocation(
+            name: "Bountiful Blessings Food Pantry",
+            type: "pantry",
+            address: "204 E Pecan St, Pflugerville, TX 78660",
+            hours: "1st & 3rd Sat: 9 AM - 12 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.4402, longitude: -97.6163)
+        ),
+        PantryLocation(
+            name: "Saffron Austin",
+            type: "vegetarian",
+            address: "3616 Far West Blvd #113, Austin, TX 78731",
+            hours: "Mon–Sun: 11 AM – 10 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.3548, longitude: -97.7562)
+        ),
+        PantryLocation(
+            name: "Ayooga Halal Express",
+            type: "halal",
+            address: "1805 N Hampton Rd, Austin, TX 78705",
+            hours: "Mon–Sun: 11 AM – 12 AM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.2811, longitude: -97.7303)
+        ),
+        PantryLocation(
+            name: "Wheatsville Food Co-op (South)",
+            type: "grocery",
+            address: "4001 S Lamar Blvd, Austin, TX 78704",
+            hours: "Mon-Sun: 7:30 AM - 10 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.2319, longitude: -97.7952)
+        ),
+        PantryLocation(
+            name: "Gusto Italian Kitchen (Gluten-Free Friendly)",
+            type: "Gluten-Free",
+            address: "4800 Burnet Rd, Austin, TX 78756",
+            hours: "Mon-Sun: 11 AM - 10 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.3195, longitude: -97.7388)
+        ),
+        PantryLocation(
+            name: "Zucchini Kill Bakery",
+            type: "vegan",
+            address: "701 E 53rd St, Austin, TX 78751",
+            hours: "Wed-Sun: 12 PM - 6 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.3135, longitude: -97.7142)
+        ),
+        PantryLocation(
+            name: "Abo Youssef Mediterranean Catering",
+            type: "halal",
+            address: "2101 Manor Rd, Austin, TX 78722",
+            hours: "Mon-Sun: 11 AM - 10 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.2839, longitude: -97.7191)
+        ),
+        PantryLocation(
+            name: "Main Street Baptist Food Pantry",
+            type: "pantry",
+            address: "1001 S Main St, Georgetown, TX 78626",
+            hours: "Tue & Wed: 10 AM - 12 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.6291, longitude: -97.6775)
+        ),
+    PantryLocation(
+            name: "Circle of Hope Community Center",
+            type: "pantry",
+            address: "2900 W Pecan St, Pflugerville, TX 78660",
+            hours: "Mon & Fri: 8 AM - 11 AM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.4452, longitude: -97.6418)
+        ),
+        PantryLocation(
+            name: "Levant Halal Mediterranean Cafe",
+            type: "halal",
+            address: "1320 Cypress Creek Road #105, Cedar Park, TX 78613",
+            hours: "Mon–Sun: 11 AM – 9 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.4735, longitude: -97.8422)
+        ),
+        PantryLocation(
+            name: "The Well Westlake",
+            type: "Gluten-Free",
+            address: "6317 Bee Caves Road, Suite 200, Austin, TX 78746",
+            hours: "Mon–Sun: 8 AM – 9 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.2912, longitude: -97.8285)
+        ),
+        PantryLocation(
+            name: "Mirchi Indo-Pak Halal Restaurant",
+            type: "halal",
+            address: "2301 S Lakeline Blvd Suite B800, Cedar Park, TX 78613",
+            hours: "Mon–Sun: 11:30 AM – 11:30 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.4704, longitude: -97.7891)
+        ),
+        PantryLocation(
+            name: "Aladdin Halal Grill",
+            type: "halal",
+            address: "200 Buttercup Creek Blvd, Suite #130, Cedar Park, TX 78613",
+            hours: "Mon–Sun: 11 AM – 10 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.4795, longitude: -97.8406)
+        ),
+        PantryLocation(
+            name: "Grove Wine Bar & Kitchen Westlake",
+            type: "Gluten-Free",
+            address: "6317 Bee Cave Road, #380, Austin, TX 78746",
+            hours: "Mon–Thu: 11 AM – 9 PM, Fri–Sat: 11 AM – 10 PM, Sun: 10:30 AM – 9 PM",
+            coordinate: CLLocationCoordinate2D(latitude: 30.2908, longitude: -97.8291)
+        ),
+    PantryLocation(
+        name: "H-E-B Pflugerville",
+        type: "grocery",
+        address: "201 N FM 685, Pflugerville, TX 78660",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4414, longitude: -97.6111)
+    ),
+    PantryLocation(
+        name: "The Well Downtown",
+        type: "Gluten-Free",
+        address: "440 W 2nd Street, Austin, TX 78701",
+        hours: "Mon–Sun: 8 AM – 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2655, longitude: -97.7479)
+    ),
+    PantryLocation(
+        name: "Rebel Cheese (North)",
+        type: "vegan",
+        address: "11500 Rock Rose Ave, Austin, TX 78758",
+        hours: "Mon–Sun: 10 AM – 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4019, longitude: -97.7214)
+    ),
+    PantryLocation(
+        name: "Hutto Food Pantry",
+        type: "pantry",
+        address: "350 Ed Schmidt Blvd, Hutto, TX 78634",
+        hours: "Sat: 8:30 AM - 11:30 AM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5482, longitude: -97.5458)
+    ),
+    PantryLocation(
+        name: "St. William Catholic Church Food Pantry",
+        type: "pantry",
+        address: "620 Round Rock West Dr, Round Rock, TX 78681",
+        hours: "Mon-Thu: 9 AM - 12 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5105, longitude: -97.6934)
+    ),
+    PantryLocation(
+        name: "Vineyard Food Pantry",
+        type: "pantry",
+        address: "13208 Morris Rd, Austin, TX 78729",
+        hours: "Wed: 1 PM - 3 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4594, longitude: -97.7712)
+    ),
+    PantryLocation(
+        name: "El Buen Samaritano (Main Office)",
+        type: "pantry",
+        address: "7000 Woodhue Dr, Austin, TX 78744",
+        hours: "Tue-Thu: 9 AM - 11 AM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.1915, longitude: -97.7694)
+    ),
+    PantryLocation(
+        name: "H-E-B Hutto",
+        type: "grocery",
+        address: "5000 Gattis School Rd, Hutto, TX 78634",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5192, longitude: -97.5901)
+    ),
+    PantryLocation(
+        name: "H-E-B Round Rock (Gattis School)",
+        type: "grocery",
+        address: "3750 Gattis School Rd, Round Rock, TX 78664",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5054, longitude: -97.6192)
+    ),
+    PantryLocation(
+        name: "H-E-B Pflugerville (Springbrook)",
+        type: "grocery",
+        address: "1434 Wells Branch Pkwy, Pflugerville, TX 78660",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4431, longitude: -97.6625)
+    ),
+    PantryLocation(
+        name: "Arlo's Curbside (South)",
+        type: "vegan",
+        address: "3901 Promontory Point Dr, Austin, TX 78744",
+        hours: "Thu–Sun: 12 PM – 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2104, longitude: -97.7548)
+    ),
+    PantryLocation(
+        name: "Next Level Burger",
+        type: "vegan",
+        address: "525 N Lamar Blvd, Austin, TX 78703",
+        hours: "Mon-Sun: 11 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2706, longitude: -97.7533)
+    ),
+    PantryLocation(
+        name: "Suprabhat (Pure Veg)",
+        type: "vegetarian",
+        address: "9225 W Parmer Ln, Austin, TX 78717",
+        hours: "Wed–Mon: 11 AM – 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4519, longitude: -97.7612)
+    ),
+    PantryLocation(
+        name: "Halal Wings Plus",
+        type: "halal",
+        address: "5320 Cameron Rd, Austin, TX 78723",
+        hours: "Mon–Sun: 11 AM – 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3142, longitude: -97.7019)
+    ),
+    PantryLocation(
+        name: "Phara's Mediterranean",
+        type: "halal",
+        address: "111 North Loop Blvd E, Austin, TX 78751",
+        hours: "Tue–Sun: 5 PM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3184, longitude: -97.7242)
+    ),
+    PantryLocation(
+        name: "Picnik Burnet Road",
+        type: "Gluten-Free",
+        address: "4801 Burnet Rd, Austin, TX 78756",
+        hours: "Mon–Sun: 7 AM – 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3198, longitude: -97.7391)
+    ),
+    PantryLocation(
+        name: "Buda United Methodist Church Food Pantry",
+        type: "pantry",
+        address: "302 Elm St, Buda, TX 78610",
+        hours: "Wed: 10 AM - 12 PM, Sat: 8 AM - 10 AM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.0833, longitude: -97.8441)
+    ),
+    PantryLocation(
+        name: "St. Ignatius Martyr Food Pantry",
+        type: "pantry",
+        address: "2303 Euclid Ave, Austin, TX 78704",
+        hours: "Mon-Wed: 9 AM - 1 PM, Thu: 9 AM - 11 AM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2415, longitude: -97.7618)
+    ),
+    PantryLocation(
+        name: "Travis County Community Center (Manor)",
+        type: "pantry",
+        address: "600 W Carrie Manor St, Manor, TX 78653",
+        hours: "Mon-Fri: 8 AM - 5 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3421, longitude: -97.5645)
+    ),
+    PantryLocation(
+        name: "Hays County Food Bank Distribution (Kyle)",
+        type: "pantry",
+        address: "801 Burleson St, Kyle, TX 78640",
+        hours: "Tue: 12 PM - 1 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.0125, longitude: -97.8642)
+    ),
+    PantryLocation(
+        name: "Halal Bros Round Rock",
+        type: "halal",
+        address: "3107 S IH 35, Round Rock, TX 78664",
+        hours: "Mon-Sun: 11:30 AM - 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4901, longitude: -97.6749)
+    ),
+    PantryLocation(
+        name: "Halal Bros Anderson Mill",
+        type: "halal",
+        address: "11521 N FM 620, Austin, TX 78726",
+        hours: "Mon-Sun: 11:30 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4578, longitude: -97.7925)
+    ),
+    PantryLocation(
+        name: "H-E-B Kyle",
+        type: "grocery",
+        address: "5401 South FM 1626, Kyle, TX 78640",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.0215, longitude: -97.8912)
+    ),
+    PantryLocation(
+        name: "H-E-B Buda",
+        type: "grocery",
+        address: "15300 S IH 35 Frontage Rd, Buda, TX 78610",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.0864, longitude: -97.8214)
+    ),
+    PantryLocation(
+        name: "H-E-B Manor",
+        type: "grocery",
+        address: "13649 US-290, Manor, TX 78653",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3498, longitude: -97.5402)
+    ),
+    PantryLocation(
+        name: "The Beer Plant",
+        type: "vegan",
+        address: "3110 Windsor Rd, Austin, TX 78703",
+        hours: "Tue-Sun: 4 PM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2921, longitude: -97.7635)
+    ),
+    PantryLocation(
+        name: "Citizen Eatery",
+        type: "vegetarian",
+        address: "5011 Burnet Rd, Austin, TX 78756",
+        hours: "Mon-Sun: 11 AM - 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3228, longitude: -97.7394)
+    ),
+    PantryLocation(
+        name: "Gati Ice Cream",
+        type: "vegan",
+        address: "1512 Holly St, Austin, TX 78702",
+        hours: "Mon-Sun: 11 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2524, longitude: -97.7241)
+    ),
+    PantryLocation(
+        name: "Wild Wood Bakehouse Bakery",
+        type: "Gluten-Free",
+        address: "100 12th St, Austin, TX 78701",
+        hours: "Mon-Sat: 9 AM - 6 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2731, longitude: -97.7412)
+    ),
+    PantryLocation(
+        name: "Capital Area Rural Transportation System (CARTS) Food Delivery Hub",
+        type: "pantry",
+        address: "2300 E 7th St, Austin, TX 78702",
+        hours: "Mon-Fri: 8 AM - 4 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2625, longitude: -97.7151)
+    ),
+    PantryLocation(
+        name: "St. John's Community Food Pantry",
+        type: "pantry",
+        address: "500 E Wonsley Dr, Austin, TX 78753",
+        hours: "Wed: 9 AM - 11 AM, Sat: 9 AM - 12 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3448, longitude: -97.6972)
+    ),
+    PantryLocation(
+        name: "Hill Country Nazarene Food Pantry",
+        type: "pantry",
+        address: "1750 Bagdad Rd, Cedar Park, TX 78613",
+        hours: "Tue & Thu: 10 AM - 1 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5189, longitude: -97.8465)
+    ),
+    PantryLocation(
+        name: "Fiesta Mart IH-35",
+        type: "grocery",
+        address: "3909 N Interstate 35 SB, Austin, TX 78722",
+        hours: "Mon–Sun: 7 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2979, longitude: -97.7188)
+    ),
+    PantryLocation(
+        name: "MT Supermarket",
+        type: "grocery",
+        address: "10901 N Lamar Blvd, Austin, TX 78753",
+        hours: "Mon–Sun: 9 AM – 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3752, longitude: -97.6891)
+    ),
+    PantryLocation(
+        name: "Asiana Indian Cuisine",
+        type: "vegetarian",
+        address: "801 E William Cannon Dr #205, Austin, TX 78745",
+        hours: "Wed–Mon: 11 AM – 9:30 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.1982, longitude: -97.7714)
+    ),
+    PantryLocation(
+        name: "Nadam (Pure Veg)",
+        type: "vegetarian",
+        address: "13343 US-183 #250, Austin, TX 78750",
+        hours: "Tue–Sun: 11:30 AM – 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4468, longitude: -97.7994)
+    ),
+    PantryLocation(
+        name: "Aster's Ethiopian Restaurant",
+        type: "vegetarian",
+        address: "2801 IH-35 Frontage Rd, Austin, TX 78722",
+        hours: "Tue–Sun: 11 AM – 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2905, longitude: -97.7226)
+    ),
+    PantryLocation(
+        name: "Shandeez Mediterranean Grill",
+        type: "halal",
+        address: "11508 Palmway Ln, Austin, TX 78759",
+        hours: "Mon–Sun: 11 AM – 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4182, longitude: -97.7471)
+    ),
+    PantryLocation(
+        name: "Kismet Cafe",
+        type: "halal",
+        address: "1000 E 41st St #200, Austin, TX 78751",
+        hours: "Mon–Sun: 10 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2998, longitude: -97.7185)
+    ),
+    PantryLocation(
+        name: "Lil' Nonna's Vegan Pizza",
+        type: "vegan",
+        address: "440 E St Elmo Rd A-1, Austin, TX 78745",
+        hours: "Tue–Sun: 4 PM – 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2148, longitude: -97.7612)
+    ),
+    PantryLocation(
+        name: "Plow Burger",
+        type: "vegan",
+        address: "1505 Town Creek Dr, Austin, TX 78741",
+        hours: "Mon–Sun: 11 AM – 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2435, longitude: -97.7268)
+    ),
+    PantryLocation(
+        name: "Thai Fresh (Gluten-Free Bakery Selection)",
+        type: "Gluten-Free",
+        address: "909 W Mary St, Austin, TX 78704",
+        hours: "Mon–Sun: 9 AM – 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2452, longitude: -97.7594)
+    ),
+    PantryLocation(
+        name: "Bastrop County Emergency Food Pantry",
+        type: "pantry",
+        address: "806 Fayette St, Bastrop, TX 78602",
+        hours: "Mon-Fri: 8 AM - 4 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.1042, longitude: -97.3115)
+    ),
+    PantryLocation(
+        name: "Lockhart Food Pantry",
+        type: "pantry",
+        address: "1115 S Commerce St, Lockhart, TX 78644",
+        hours: "Tue: 1 PM - 4 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.8732, longitude: -97.6748)
+    ),
+    PantryLocation(
+        name: "LACARE Food Pantry (Burnet)",
+        type: "pantry",
+        address: "507 W Jackson St, Burnet, TX 78611",
+        hours: "Mon, Wed, Fri: 9 AM - 2 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.7571, longitude: -98.2312)
+    ),
+    PantryLocation(
+        name: "Helping Hands Ministry of Belton",
+        type: "pantry",
+        address: "2210 Holland Rd, Belton, TX 76513",
+        hours: "Mon & Wed: 10 AM - 12 PM, Thu: 4 PM - 6 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 31.0524, longitude: -97.4518)
+    ),
+    PantryLocation(
+        name: "H-E-B San Marcos",
+        type: "grocery",
+        address: "641 E Hopkins St, San Marcos, TX 78666",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.8835, longitude: -97.9304)
+    ),
+    PantryLocation(
+        name: "H-E-B Marble Falls",
+        type: "grocery",
+        address: "1503 Hwy 1431 W, Marble Falls, TX 78654",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5739, longitude: -98.2872)
+    ),
+    PantryLocation(
+        name: "H-E-B Bastrop",
+        type: "grocery",
+        address: "104 Hasler Blvd, Bastrop, TX 78602",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.1132, longitude: -97.3248)
+    ),
+    PantryLocation(
+        name: "H-E-B Elgin",
+        type: "grocery",
+        address: "1080 Hwy 290 E, Elgin, TX 78621",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3478, longitude: -97.3512)
+    ),
+    PantryLocation(
+        name: "H-E-B Lockhart",
+        type: "grocery",
+        address: "403 S Colorado St, Lockhart, TX 78644",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.8812, longitude: -97.6719)
+    ),
+    PantryLocation(
+        name: "Prik Nam Pla (Vegan Friendly Selection)",
+        type: "vegan",
+        address: "1911 Dutton Dr, San Marcos, TX 78666",
+        hours: "Tue–Sun: 11 AM – 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.8694, longitude: -97.9548)
+    ),
+    PantryLocation(
+        name: "The Hitch-N-Post Cafe",
+        type: "vegetarian",
+        address: "104 Lake Rd, Belton, TX 76513",
+        hours: "Mon–Sat: 7 AM – 2 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 31.0645, longitude: -97.4725)
+    ),
+    PantryLocation(
+        name: "Sabor de mi Tierra (Halal Menu items)",
+        type: "halal",
+        address: "515 W San Antonio St, San Marcos, TX 78666",
+        hours: "Mon–Sat: 10 AM – 8 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.8811, longitude: -97.9452)
+    ),
+    PantryLocation(
+        name: "Industry San Marcos (Gluten-Free Friendly)",
+        type: "Gluten-Free",
+        address: "110 E Martin Luther King Dr, San Marcos, TX 78666",
+        hours: "Mon–Sun: 11 AM – 12 AM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.8791, longitude: -97.9405)
+    ),
+    PantryLocation(
+        name: "Costco Wholesale Pflugerville",
+        type: "grocery",
+        address: "1901 Kelly Ln, Pflugerville, TX 78660",
+        hours: "Mon-Fri: 10 AM - 8:30 PM, Sat: 9:30 AM - 6 PM, Sun: 10 AM - 6 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4524, longitude: -97.5948)
+    ),
+    PantryLocation(
+        name: "Costco Wholesale Cedar Park",
+        type: "grocery",
+        address: "4601 183A Toll Rd, Cedar Park, TX 78613",
+        hours: "Mon-Fri: 10 AM - 8:30 PM, Sat: 9:30 AM - 6 PM, Sun: 10 AM - 6 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5284, longitude: -97.8071)
+    ),
+    PantryLocation(
+        name: "Costco Wholesale NE Austin",
+        type: "grocery",
+        address: "10401 Research Blvd, Austin, TX 78759",
+        hours: "Mon-Fri: 10 AM - 8:30 PM, Sat: 9:30 AM - 6 PM, Sun: 10 AM - 6 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3891, longitude: -97.7412)
+    ),
+    PantryLocation(
+        name: "Walmart Supercenter Round Rock (I-35)",
+        type: "grocery",
+        address: "2701 S Interstate 35, Round Rock, TX 78664",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4905, longitude: -97.6784)
+    ),
+    PantryLocation(
+        name: "Walmart Supercenter Round Rock East",
+        type: "grocery",
+        address: "4700 E Palm Valley Blvd, Round Rock, TX 78665",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5189, longitude: -97.6152)
+    ),
+    PantryLocation(
+        name: "Walmart Supercenter Cedar Park",
+        type: "grocery",
+        address: "201 Walton Way, Cedar Park, TX 78613",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4791, longitude: -97.8242)
+    ),
+    PantryLocation(
+        name: "Walmart Supercenter Pflugerville",
+        type: "grocery",
+        address: "1548 FM 685, Pflugerville, TX 78660",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4512, longitude: -97.6215)
+    ),
+    PantryLocation(
+        name: "H-E-B Taylor",
+        type: "grocery",
+        address: "100 Carlos G Parker Blvd NW, Taylor, TX 76574",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5842, longitude: -97.4215)
+    ),
+    PantryLocation(
+        name: "H-E-B Round Rock (University Blvd)",
+        type: "grocery",
+        address: "14340 Ronald Reagan Blvd, Leander, TX 78641",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5891, longitude: -97.7845)
+    ),
+    PantryLocation(
+        name: "H-E-B Leander (US-183)",
+        type: "grocery",
+        address: "651 N US Hwy 183, Leander, TX 78641",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5862, longitude: -97.8581)
+    ),
+    PantryLocation(
+        name: "Shepherd's Heart Taylor Food Pantry",
+        type: "pantry",
+        address: "410 W 7th St, Taylor, TX 76574",
+        hours: "Tue: 1 PM - 4 PM, Thu: 1 PM - 4 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5731, longitude: -97.4158)
+    ),
+    PantryLocation(
+        name: "Rock Round-Up Food Pantry",
+        type: "pantry",
+        address: "610 S Austin Ave, Georgetown, TX 78626",
+        hours: "Mon-Wed: 9 AM - 12 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.6315, longitude: -97.6765)
+    ),
+    PantryLocation(
+        name: "Manor Food Pantry Community Center",
+        type: "pantry",
+        address: "401 W Murray Ave, Manor, TX 78653",
+        hours: "Sat: 9 AM - 11 AM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3441, longitude: -97.5591)
+    ),
+    PantryLocation(
+        name: "Costco Wholesale S Austin",
+        type: "grocery",
+        address: "4301 W William Cannon Dr Bldg A Ste 100, Austin, TX 78749",
+        hours: "Mon-Fri: 10 AM - 8:30 PM, Sat: 9:30 AM - 6 PM, Sun: 10 AM - 6 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2245, longitude: -97.8214)
+    ),
+    PantryLocation(
+        name: "Costco Wholesale Georgetown",
+        type: "grocery",
+        address: "2201A N IH 35, Georgetown, TX 78626",
+        hours: "Mon-Fri: 10 AM - 8:30 PM, Sat: 9:30 AM - 6 PM, Sun: 10 AM - 6 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.6612, longitude: -97.6894)
+    ),
+    PantryLocation(
+        name: "Costco Wholesale Liberty Hill",
+        type: "grocery",
+        address: "595 US 183, Liberty Hill, TX 78642",
+        hours: "Mon-Fri: 10 AM - 8:30 PM, Sat: 9:30 AM - 6 PM, Sun: 10 AM - 6 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.6489, longitude: -97.8925)
+    ),
+    PantryLocation(
+        name: "Riverside H-E-B plus!",
+        type: "grocery",
+        address: "2508 E Riverside Dr, Austin, TX 78741",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2325, longitude: -97.7214)
+    ),
+    PantryLocation(
+        name: "Hancock Center H-E-B",
+        type: "grocery",
+        address: "1000 E 41st St, Austin, TX 78751",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2995, longitude: -97.7181)
+    ),
+    PantryLocation(
+        name: "7th Street H-E-B",
+        type: "grocery",
+        address: "2701 E 7th St, Austin, TX 78702",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2594, longitude: -97.7115)
+    ),
+    PantryLocation(
+        name: "Burnet Rd H-E-B",
+        type: "grocery",
+        address: "5808 Burnet Rd, Austin, TX 78756",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3341, longitude: -97.7392)
+    ),
+    PantryLocation(
+        name: "Austin S Interstate 35 Walmart Supercenter",
+        type: "grocery",
+        address: "9300 S Interstate 35 Ste B, Austin, TX 78748",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.1585, longitude: -97.7942)
+    ),
+    PantryLocation(
+        name: "Austin Brodie Ln Walmart Supercenter",
+        type: "grocery",
+        address: "5017 W Highway 290, Austin, TX 78735",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2319, longitude: -97.8245)
+    ),
+    PantryLocation(
+        name: "Austin E Ben White Blvd Walmart Supercenter",
+        type: "grocery",
+        address: "710 E Ben White Blvd, Austin, TX 78704",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2185, longitude: -97.7562)
+    ),
+    PantryLocation(
+        name: "Austin Ranch Rd Walmart Supercenter",
+        type: "grocery",
+        address: "13201 Ranch Rd 620 N, Austin, TX 78717",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4682, longitude: -97.7915)
+    ),
+    PantryLocation(
+        name: "Operation Liberty Hill Food Pantry",
+        type: "pantry",
+        address: "1401 Hwy 183, Liberty Hill, TX 78642",
+        hours: "Tue & Thu: 10 AM - 1 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.6625, longitude: -97.9048)
+    ),
+    PantryLocation(
+        name: "Bertram Food Pantry",
+        type: "pantry",
+        address: "132 N West St, Bertram, TX 78605",
+        hours: "Thu: 1 PM - 4 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.7441, longitude: -98.0562)
+    ),
+    PantryLocation(
+        name: "The Storehouse Food Pantry",
+        type: "pantry",
+        address: "1020 Kollhope Rd, Fredericksburg, TX 78624",
+        hours: "Wed & Sat: 9 AM - 12 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2591, longitude: -98.8845)
+    ),
+    PantryLocation(
+        name: "Smithville Food Pantry",
+        type: "pantry",
+        address: "107 SW 2nd St, Smithville, TX 78957",
+        hours: "Wed: 9 AM - 11:30 AM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.0092, longitude: -97.1614)
+    ),
+    PantryLocation(
+        name: "Luling Food Pantry",
+        type: "pantry",
+        address: "701 E Davis St, Luling, TX 78648",
+        hours: "Thu: 9 AM - 1 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.6795, longitude: -97.6418)
+    ),
+    PantryLocation(
+        name: "Giddings Food Pantry",
+        type: "pantry",
+        address: "190 N Harris St, Giddings, TX 78942",
+        hours: "Wed: 8:30 AM - 11 AM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.1834, longitude: -96.9385)
+    ),
+    PantryLocation(
+        name: "The Local Vegan (Mobile Unit)",
+        type: "vegan",
+        address: "120 Main St, Buda, TX 78610",
+        hours: "Fri–Sun: 11 AM – 7 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.0841, longitude: -97.8425)
+    ),
+    PantryLocation(
+        name: "Blanco County South Food Pantry",
+        type: "pantry",
+        address: "610 Main St, Blanco, TX 78606",
+        hours: "1st & 3rd Sat: 9 AM - 11 AM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.0984, longitude: -98.4215)
+    ),
+    PantryLocation(
+        name: "H-E-B Lockhart (S Colorado St)",
+        type: "grocery",
+        address: "1900 S Colorado St, Lockhart, TX 78644",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.8654, longitude: -97.6791)
+    ),
+    PantryLocation(
+        name: "Walmart Supercenter Lockhart",
+        type: "grocery",
+        address: "1900 W San Antonio St, Lockhart, TX 78644",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.8839, longitude: -97.6948)
+    ),
+    PantryLocation(
+        name: "H-E-B Bastrop (Hwy 71)",
+        type: "grocery",
+        address: "733 Hwy 71 W, Bastrop, TX 78602",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.1082, longitude: -97.3514)
+    ),
+    PantryLocation(
+        name: "Walmart Supercenter Bastrop",
+        type: "grocery",
+        address: "488 Hwy 71 W, Bastrop, TX 78602",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.1031, longitude: -97.3394)
+    ),
+    PantryLocation(
+        name: "H-E-B Marble Falls (Hwy 281)",
+        type: "grocery",
+        address: "1503 Bluebonnet Dr, Marble Falls, TX 78654",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5735, longitude: -98.2741)
+    ),
+    PantryLocation(
+        name: "Walmart Supercenter Marble Falls",
+        type: "grocery",
+        address: "2700 US-281, Marble Falls, TX 78654",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.6015, longitude: -98.2718)
+    ),
+    PantryLocation(
+        name: "H-E-B Burnet",
+        type: "grocery",
+        address: "105 S Boundary St, Burnet, TX 78611",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.7548, longitude: -98.2385)
+    ),
+    PantryLocation(
+        name: "H-E-B Fredericksburg",
+        type: "grocery",
+        address: "407 S Adams St, Fredericksburg, TX 78624",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2694, longitude: -98.8785)
+    ),
+    PantryLocation(
+        name: "Walmart Supercenter Fredericksburg",
+        type: "grocery",
+        address: "1435 E Main St, Fredericksburg, TX 78624",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2652, longitude: -98.8554)
+    ),
+    PantryLocation(
+        name: "H-E-B San Marcos (Hopkins St)",
+        type: "grocery",
+        address: "641 E Hopkins St, San Marcos, TX 78666",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.8834, longitude: -97.9302)
+    ),
+    PantryLocation(
+        name: "Walmart Supercenter San Marcos",
+        type: "grocery",
+        address: "1015 Hwy 80, San Marcos, TX 78666",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.8878, longitude: -97.9142)
+    ),
+    PantryLocation(
+        name: "H-E-B Elgin (S Hwy 95)",
+        type: "grocery",
+        address: "1080 Hwy 290 E, Elgin, TX 78621",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3479, longitude: -97.3514)
+    ),
+    PantryLocation(
+        name: "Walmart Supercenter Taylor",
+        type: "grocery",
+        address: "3701 N Main St, Taylor, TX 76574",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5985, longitude: -97.4124)
+    ),
+    PantryLocation(
+        name: "H-E-B Kingsland",
+        type: "grocery",
+        address: "511 Hwy 1431, Kingsland, TX 78639",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.6582, longitude: -98.4415)
+    ),
+    PantryLocation(
+        name: "Llano Food Pantry",
+        type: "pantry",
+        address: "1110 Berry St, Llano, TX 78643",
+        hours: "Fri: 9 AM - 12 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.7512, longitude: -98.6824)
+    ),
+    PantryLocation(
+        name: "Mason Food Pantry",
+        type: "pantry",
+        address: "411 Moody St, Mason, TX 76856",
+        hours: "Mon: 3 PM - 5 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.7495, longitude: -99.2281)
+    ),
+    PantryLocation(
+        name: "Blanco Good Samaritan Food Pantry",
+        type: "pantry",
+        address: "620 Pecan St, Blanco, TX 78606",
+        hours: "Fri: 10 AM - 2 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.0968, longitude: -98.4234)
+    ),
+    PantryLocation(
+        name: "Helping Hands of Georgetown",
+        type: "pantry",
+        address: "102 Church St, Georgetown, TX 78626",
+        hours: "Sun: 3:30 PM - 5 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.6321, longitude: -97.6742)
+    ),
+    PantryLocation(
+        name: "The Common Good Food Pantry",
+        type: "pantry",
+        address: "1401 N Lampasas St, Round Rock, TX 78664",
+        hours: "Sat: 9 AM - 11:30 AM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.5212, longitude: -97.6684)
+    ),
+    PantryLocation(
+        name: "Central Texas Halal Market",
+        type: "halal",
+        address: "1100 Grand Avenue Pkwy, Pflugerville, TX 78660",
+        hours: "Mon–Sun: 10 AM – 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4612, longitude: -97.6741)
+    ),
+    PantryLocation(
+        name: "Casa de Luz (Gluten-Free Friendly Whole Food)",
+        type: "Gluten-Free",
+        address: "201 S Adams St, Fredericksburg, TX 78624",
+        hours: "Daily: 11 AM – 8 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2715, longitude: -98.8772)
+    ),
+    PantryLocation(
+        name: "The Vegan Nom (San Marcos Outpost)",
+        type: "vegan",
+        address: "300 N LBJ Dr, San Marcos, TX 78666",
+        hours: "Tue–Sun: 9 AM – 8 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.8841, longitude: -97.9408)
+    ),
+    PantryLocation(
+        name: "Arlo's Junior",
+        type: "vegan",
+        address: "2337 E Cesar Chavez St, Austin, TX 78702",
+        hours: "Mon-Thu: 12 PM - 11 PM, Fri-Sat: 12 PM - 12:45 AM, Sun: 12 PM - 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2541, longitude: -97.7168)
+    ),
+    PantryLocation(
+        name: "Bouldin Creek Cafe",
+        type: "vegetarian",
+        address: "1900 S 1st St, Austin, TX 78704",
+        hours: "Mon-Sun: 8 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2476, longitude: -97.7554)
+    ),
+    PantryLocation(
+        name: "Citizen All Day",
+        type: "vegetarian",
+        address: "4818 Burnet Rd Ste 600, Austin, TX 78756",
+        hours: "Mon-Sun: 7 AM - 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3197, longitude: -97.7391)
+    ),
+    PantryLocation(
+        name: "The Halal Corner",
+        type: "halal",
+        address: "1200 W 26th St, Austin, TX 78705",
+        hours: "Mon-Sun: 11 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2917, longitude: -97.7468)
+    ),
+    PantryLocation(
+        name: "Abo Youssef Mediterranean Catering",
+        type: "halal",
+        address: "2101 Manor Rd, Austin, TX 78722",
+        hours: "Mon-Sun: 11 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2839, longitude: -97.7191)
+    ),
+    PantryLocation(
+        name: "Saffron Austin",
+        type: "vegetarian",
+        address: "3616 Far West Blvd #113, Austin, TX 78731",
+        hours: "Mon-Sun: 11 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3548, longitude: -97.7562)
+    ),
+    PantryLocation(
+        name: "Wild Wood Bakehouse",
+        type: "Gluten-Free",
+        address: "3016 Guadalupe St, Austin, TX 78705",
+        hours: "Tue-Sat: 11 AM - 9 PM, Sun: 10 AM - 3 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2974, longitude: -97.7417)
+    ),
+    PantryLocation(
+        name: "Picnik Burnet Road",
+        type: "Gluten-Free",
+        address: "4801 Burnet Rd, Austin, TX 78756",
+        hours: "Mon-Sun: 7 AM - 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.3198, longitude: -97.7391)
+    ),
+    PantryLocation(
+        name: "The Beer Plant",
+        type: "vegan",
+        address: "3110 Windsor Rd, Austin, TX 78703",
+        hours: "Tue-Sun: 4 PM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2921, longitude: -97.7635)
+    ),
+    PantryLocation(
+        name: "Gati Ice Cream",
+        type: "vegan",
+        address: "1512 Holly St, Austin, TX 78702",
+        hours: "Mon-Sun: 11 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2524, longitude: -97.7241)
+    ),
+    PantryLocation(
+        name: "Asiana Indian Cuisine",
+        type: "vegetarian",
+        address: "801 E William Cannon Dr #205, Austin, TX 78745",
+        hours: "Wed-Mon: 11 AM - 9:30 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.1982, longitude: -97.7714)
+    ),
+    PantryLocation(
+        name: "Kismet Cafe",
+        type: "halal",
+        address: "1000 E 41st St #200, Austin, TX 78751",
+        hours: "Mon-Sun: 10 AM - 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2998, longitude: -97.7185)
+    ),
+    PantryLocation(
+        name: "Lil' Nonna's Vegan Pizza",
+        type: "vegan",
+        address: "440 E St Elmo Rd A-1, Austin, TX 78745",
+        hours: "Tue-Sun: 4 PM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2148, longitude: -97.7612)
+    ),
+    PantryLocation(
+        name: "Thai Fresh",
+        type: "Gluten-Free",
+        address: "909 W Mary St, Austin, TX 78704",
+        hours: "Mon-Sun: 9 AM - 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2452, longitude: -97.7594)
+    ),
+    PantryLocation(
+        name: "Nadam Restaurant",
+        type: "vegetarian",
+        address: "13343 US-183 #250, Austin, TX 78750",
+        hours: "Tue-Sun: 11:30 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4468, longitude: -97.7994)
+    ),
+    PantryLocation(
+        name: "Aster's Ethiopian Restaurant",
+        type: "vegetarian",
+        address: "2801 IH-35 Frontage Rd, Austin, TX 78722",
+        hours: "Tue-Sun: 11 AM - 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2905, longitude: -97.7226)
+    ),
+    PantryLocation(
+        name: "Plow Burger",
+        type: "vegan",
+        address: "1505 Town Creek Dr, Austin, TX 78741",
+        hours: "Mon-Sun: 11 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2435, longitude: -97.7268)
+    ),
+    PantryLocation(
+        name: "Shandeez Mediterranean Grill",
+        type: "halal",
+        address: "11508 Palmway Ln, Austin, TX 78759",
+        hours: "Mon-Sun: 11 AM - 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.4182, longitude: -97.7471)
+    ),
+    PantryLocation(
+        name: "Kelly Center for Hunger Relief",
+        type: "pantry",
+        address: "915 N Florence St, El Paso, TX 79902",
+        hours: "Tue-Fri: 9 AM - 2 PM, Sat: 9 AM - 12 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 31.7672, longitude: -106.4861)
+    ),
+    PantryLocation(
+        name: "South Plains Food Bank",
+        type: "pantry",
+        address: "5605 MLK Blvd, Lubbock, TX 79404",
+        hours: "Mon-Fri: 8 AM - 5 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 33.5358, longitude: -101.8152)
+    ),
+    PantryLocation(
+        name: "Plantaqueria",
+        type: "vegan",
+        address: "124 Broadway, San Antonio, TX 78205",
+        hours: "Mon-Sun: 7 AM - 4 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.4268, longitude: -98.4884)
+    ),
+    PantryLocation(
+        name: "High Plains Food Bank",
+        type: "pantry",
+        address: "815 Ross St, Amarillo, TX 79102",
+        hours: "Mon-Fri: 8 AM - 12 PM & 1 PM - 5 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 35.2012, longitude: -101.8541)
+    ),
+    PantryLocation(
+        name: "Food Bank of the Rio Grande Valley",
+        type: "pantry",
+        address: "724 N Cage Blvd, Pharr, TX 78577",
+        hours: "Mon-Thu: 7:30 AM - 4 PM, Fri: 7:30 AM - 12 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 26.2052, longitude: -98.1834)
+    ),
+    PantryLocation(
+        name: "West Texas Food Bank",
+        type: "pantry",
+        address: "411 Page Ave, Lyndale, TX 79762",
+        hours: "Mon-Thu: 8 AM - 4 PM, Fri: 8 AM - 12 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 31.8594, longitude: -102.3485)
+    ),
+    PantryLocation(
+        name: "Project HORIZON Food Bank",
+        type: "pantry",
+        address: "1002 Sam Houston Ave, Huntsville, TX 77340",
+        hours: "Mon-Wed: 9 AM - 1 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.7225, longitude: -95.5501)
+    ),
+    PantryLocation(
+        name: "Costco Wholesale El Paso",
+        type: "grocery",
+        address: "6101 Gateway Blvd W, El Paso, TX 79925",
+        hours: "Mon-Fri: 10 AM - 8:30 PM, Sat: 9:30 AM - 6 PM, Sun: 10 AM - 6 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 31.7841, longitude: -106.3952)
+    ),
+    PantryLocation(
+        name: "Walmart Supercenter Marfa",
+        type: "grocery",
+        address: "2200 US-67, Fort Stockton, TX 79735",
+        hours: "Mon-Sun: 6 AM - 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.8845, longitude: -102.8951)
+    ),
+    PantryLocation(
+        name: "H-E-B Corpus Christi",
+        type: "grocery",
+        address: "5313 Saratoga Blvd, Corpus Christi, TX 78413",
+        hours: "Mon-Sun: 6 AM - 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 27.6892, longitude: -97.3994)
+    ),
+    PantryLocation(
+        name: "Lubbock Impact Food Pantry",
+        type: "pantry",
+        address: "2707 34th St, Lubbock, TX 79410",
+        hours: "Mon: 5 PM - 6:30 PM, Thu: 9:30 AM - 11:30 AM",
+        coordinate: CLLocationCoordinate2D(latitude: 33.5654, longitude: -101.8719)
+    ),
+    PantryLocation(
+        name: "Tumerico (Texas Border Market Outpost)",
+        type: "vegan",
+        address: "411 N Zaragoza Rd, El Paso, TX 79907",
+        hours: "Wed-Sat: 11 AM - 8 PM, Sun: 11 AM - 4 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 31.6841, longitude: -106.3214)
+    ),
+    PantryLocation(
+        name: "Revolución Coffee + Juice",
+        type: "vegetarian",
+        address: "7959 Broadway St #500, San Antonio, TX 78209",
+        hours: "Mon-Sun: 7 AM - 7 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.5105, longitude: -98.4614)
+    ),
+    PantryLocation(
+        name: "The Greener Bar",
+        type: "vegan",
+        address: "1603 San Jacinto Blvd, Austin, TX 78701",
+        hours: "Tue-Sun: 12 PM - 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.2762, longitude: -97.7321)
+    ),
+    PantryLocation(
+        name: "Zest Fest (Pure Veg Selection)",
+        type: "vegetarian",
+        address: "4321 Texas Ave, College Station, TX 77840",
+        hours: "Mon-Sat: 11 AM - 9 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.6185, longitude: -96.3214)
+    ),
+    PantryLocation(
+        name: "Halal Market San Antonio",
+        type: "halal",
+        address: "8524 Wurzbach Rd, San Antonio, TX 78240",
+        hours: "Mon-Sun: 9 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.5189, longitude: -98.5614)
+    ),
+    PantryLocation(
+        name: "Sweet Mustard Gluten-Free Bakery",
+        type: "Gluten-Free",
+        address: "1800 McRae Blvd, El Paso, TX 79925",
+        hours: "Tue-Sat: 9 AM - 6 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 31.7915, longitude: -106.3541)
+    ),
+    PantryLocation(
+        name: "Abilene Food Bank",
+        type: "pantry",
+        address: "5505 N 1st St, Abilene, TX 79603",
+        hours: "Mon-Fri: 8 AM - 4:30 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 32.4491, longitude: -99.7824)
+    ),
+    PantryLocation(
+        name: "Wichita Falls Area Food Bank",
+        type: "pantry",
+        address: "1230 Central Fwy, Wichita Falls, TX 76306",
+        hours: "Mon-Fri: 8 AM - 5 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 33.9214, longitude: -98.4912)
+    ),
+    PantryLocation(
+        name: "Texarkana Resources Food Pantry",
+        type: "pantry",
+        address: "3011 E 19th St, Texarkana, TX 75501",
+        hours: "Mon-Fri: 8 AM - 4 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 33.4352, longitude: -94.0142)
+    ),
+    PantryLocation(
+        name: "Galveston County Food Bank",
+        type: "pantry",
+        address: "213 6th St N, Texas City, TX 77590",
+        hours: "Mon-Thu: 8 AM - 4 PM, Fri: 8 AM - 3 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.3941, longitude: -94.9054)
+    ),
+    PantryLocation(
+        name: "Laredo Regional Food Bank",
+        type: "pantry",
+        address: "2801 Anna Ave, Laredo, TX 78040",
+        hours: "Mon-Fri: 8 AM - 12 PM & 1 PM - 5 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 27.5254, longitude: -99.4912)
+    ),
+    PantryLocation(
+        name: "H-E-B McAllen",
+        type: "grocery",
+        address: "3601 N 10th St, McAllen, TX 78501",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 26.2348, longitude: -98.2312)
+    ),
+    PantryLocation(
+        name: "Walmart Supercenter Beaumont",
+        type: "grocery",
+        address: "4145 Dowlen Rd, Beaumont, TX 77706",
+        hours: "Mon–Sun: 6 AM – 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.1142, longitude: -94.1612)
+    ),
+    PantryLocation(
+        name: "Costco Wholesale Lubbock",
+        type: "grocery",
+        address: "6020 34th St, Lubbock, TX 79407",
+        hours: "Mon-Fri: 10 AM - 8:30 PM, Sat: 9:30 AM - 6 PM, Sun: 10 AM - 6 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 33.5645, longitude: -101.9385)
+    ),
+    PantryLocation(
+        name: "Food Bank of West Central Texas",
+        type: "pantry",
+        address: "5505 N 1st St, Abilene, TX 79603",
+        hours: "Mon-Fri: 8 AM - 5 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 32.4492, longitude: -99.7821)
+    ),
+    PantryLocation(
+        name: "Concho Valley Food Bank",
+        type: "pantry",
+        address: "1313 S Hill St, San Angelo, TX 76903",
+        hours: "Mon-Fri: 8 AM - 12 PM & 1 PM - 4 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 31.4481, longitude: -100.4342)
+    ),
+    PantryLocation(
+        name: "Spiral Diner & Bakery",
+        type: "vegan",
+        address: "1314 W Magnolia Ave, Fort Worth, TX 76104",
+        hours: "Mon-Sun: 11 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 32.7305, longitude: -97.3391)
+    ),
+    PantryLocation(
+        name: "The Green Seed Vegan",
+        type: "vegan",
+        address: "4322 Almeda Rd, Houston, TX 77004",
+        hours: "Mon-Sun: 11 AM - 8 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.7289, longitude: -95.3784)
+    ),
+    PantryLocation(
+        name: "Unrefined Bakery",
+        type: "Gluten-Free",
+        address: "4311 Oak Lawn Ave, Dallas, TX 75219",
+        hours: "Mon-Sat: 9 AM - 6 PM, Sun: 11 AM - 4 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 32.8185, longitude: -96.8042)
+    ),
+    PantryLocation(
+        name: "Halal Grill Amarillo",
+        type: "halal",
+        address: "3410 I-40 W, Amarillo, TX 79102",
+        hours: "Mon-Sun: 11 AM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 35.1912, longitude: -101.8794)
+    ),
+    PantryLocation(
+        name: "Madras Pavilion",
+        type: "vegetarian",
+        address: "16260 Kensington Dr, Sugar Land, TX 77479",
+        hours: "Tue-Sun: 11:30 AM - 3 PM & 5:30 PM - 10 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.5968, longitude: -95.6214)
+    ),
+    PantryLocation(
+        name: "Southeast Texas Food Bank",
+        type: "pantry",
+        address: "3845 S MLK Jr拆 Blvd, Beaumont, TX 77705",
+        hours: "Mon-Fri: 8 AM - 4 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 30.0489, longitude: -94.0952)
+    ),
+    PantryLocation(
+        name: "South Texas Food Bank",
+        type: "pantry",
+        address: "2121 Philip Ave, Laredo, TX 78043",
+        hours: "Mon-Fri: 8 AM - 5 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 27.4912, longitude: -99.4795)
+    ),
+    PantryLocation(
+        name: "Tyler Food Pantry",
+        type: "pantry",
+        address: "424 W Front St, Tyler, TX 75702",
+        hours: "Tue & Thu: 9 AM - 12 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 32.3514, longitude: -95.3054)
+    ),
+    PantryLocation(
+        name: "H-E-B Midland",
+        type: "grocery",
+        address: "3325 W Wadley Ave, Midland, TX 79707",
+        hours: "Mon-Sun: 6 AM - 11 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 32.0195, longitude: -102.1241)
+    ),
+    PantryLocation(
+        name: "Brazosport Cares Food Pantry",
+        type: "pantry",
+        address: "916 N Dixie Dr, Clute, TX 77531",
+        hours: "Tue & Thu: 9 AM - 11:30 AM",
+        coordinate: CLLocationCoordinate2D(latitude: 29.0254, longitude: -95.3992)
+    ),
+    PantryLocation(
+        name: "Senior Center Food Bank",
+        type: "pantry",
+        address: "505 W Avenue G, San Angelo, TX 76903",
+        hours: "Wed: 1 PM - 3 PM",
+        coordinate: CLLocationCoordinate2D(latitude: 31.4512, longitude: -100.4491)
+    ) 
 ]
 
