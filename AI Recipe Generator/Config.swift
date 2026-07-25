@@ -4,7 +4,7 @@
 
 // GROQ API KEY
 struct Config{
-    static let groqAPIKey = "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"
+    static let groqAPIKey = "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"
 }
 
 
