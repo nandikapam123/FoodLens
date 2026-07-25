@@ -16,7 +16,48 @@ struct OnboardingView: View {
     @State private var username = ""
     
     // For Step 2
-    @State private var preferences = ""
+    @State private var selectedPreferences: [String] = []
+    @State private var searchText = ""
+    
+    let preferenceOptions = [
+        "Vegetarian",
+        "Vegan",
+        "Gluten-Free",
+        "Dairy-Free",
+        "Nut-Free",
+        "Peanut Allergy",
+        "Tree Nut Allergy",
+        "Egg-Free",
+        "Soy-Free",
+        "Shellfish Allergy",
+        "Fish Allergy",
+        "Sesame Allergy",
+        "Halal",
+        "Kosher",
+        "Low Sodium",
+        "Low Sugar",
+        "Low Carb",
+        "Keto",
+        "Paleo",
+        "Mediterranean",
+        "High Protein",
+        "Diabetic Friendly"
+    ]
+
+    var filteredPreferences: [String] {
+
+        guard !searchText.isEmpty else {
+            return []
+        }
+
+        return preferenceOptions
+            .filter { !selectedPreferences.contains($0) }
+            .filter {
+                $0.localizedCaseInsensitiveContains(searchText)
+            }
+
+    }
+    
     @State private var accountType = "Basic"
     let accountTypes = ["Basic", "Premium"]
     
@@ -68,11 +109,165 @@ struct OnboardingView: View {
 
     var stepTwo: some View {
         VStack(spacing: 25) {
-            Text("Your Preferences")
+            Text("Customize Your Experience")
                 .font(.title2.bold())
                 .foregroundColor(Theme.primaryGreen)
             
-            inputField(icon: "fork.knife", placeholder: "e.g. halal, vegan, gluten-free", text: $preferences)
+            Text("Select any dietary preferences or allergies. You can also add your own.")
+                .font(.subheadline)
+                .foregroundColor(.white.opacity(0.7))
+                .multilineTextAlignment(.center)
+            
+            VStack(alignment: .leading, spacing: 12) {
+
+                Text("Dietary Preferences")
+                    .foregroundColor(Theme.primaryGreen)
+                    .bold()
+
+                HStack {
+
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(Theme.primaryGreen)
+
+                    TextField("Search or add preference...", text: $searchText)
+                        .foregroundColor(.white)
+
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Theme.lightGreen.opacity(0.25))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Theme.primaryGreen.opacity(0.4), lineWidth: 1)
+                        )
+                )
+
+                if !selectedPreferences.isEmpty {
+
+                    ScrollView(.horizontal, showsIndicators: false) {
+
+                        HStack {
+
+                            ForEach(selectedPreferences, id: \.self) { preference in
+
+                                HStack(spacing: 6) {
+
+                                    Text(preference)
+                                        .foregroundColor(.black)
+                                        .font(.subheadline.bold())
+
+                                    Button {
+
+                                        withAnimation {
+                                            selectedPreferences.removeAll {
+                                                $0 == preference
+                                            }
+                                        }
+
+                                    } label: {
+
+                                        Image(systemName: "xmark.circle.fill")
+                                            .foregroundColor(.black.opacity(0.7))
+
+                                    }
+
+                                }
+                                .padding(.horizontal,12)
+                                .padding(.vertical,8)
+                                .background(Theme.primaryGreen)
+                                .clipShape(Capsule())
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                if !searchText.isEmpty {
+
+                    ScrollView {
+
+                        VStack(spacing: 0) {
+
+                            ForEach(filteredPreferences, id: \.self) { preference in
+
+                                Button {
+
+                                    withAnimation {
+                                        selectedPreferences.append(preference)
+                                    }
+                                    searchText = ""
+
+                                } label: {
+
+                                    HStack {
+
+                                        Text(preference)
+                                            .foregroundColor(.white)
+
+                                        Spacer()
+
+                                        Image(systemName: "plus.circle.fill")
+                                            .foregroundColor(Theme.primaryGreen)
+
+                                    }
+                                    .padding()
+
+                                }
+
+                                Divider()
+
+                            }
+
+                            if !searchText.isEmpty &&
+                                !preferenceOptions.contains(where: {
+                                    $0.localizedCaseInsensitiveCompare(searchText) == .orderedSame
+                                }) {
+
+                                Button {
+
+                                    selectedPreferences.append(searchText)
+                                    searchText = ""
+
+                                } label: {
+
+                                    HStack {
+
+                                        Image(systemName: "plus.circle.fill")
+                                            .foregroundColor(Theme.primaryGreen)
+
+                                        Text("Add \"\(searchText)\"")
+                                            .foregroundColor(.white)
+
+                                        Spacer()
+
+                                    }
+                                    .padding()
+
+                                }
+
+                            }
+
+                        }
+                        .frame(maxHeight: 180)
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Theme.lightGreen.opacity(0.25))
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Theme.primaryGreen.opacity(0.35), lineWidth: 1)
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+
+                    }
+
+                }
+
+            }
             
             VStack(alignment: .leading, spacing: 10) {
                 Text("Account Type")
@@ -130,7 +325,7 @@ struct OnboardingView: View {
                 clearRecipesOnLogin(context: context)
                 user.name = name
                 user.username = username
-                user.preferences = preferences
+                user.preferences = selectedPreferences.joined(separator: ", ")
                 user.accountType = accountType
                 user.selectedTab = .contentView
                 
