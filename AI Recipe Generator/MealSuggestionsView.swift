@@ -151,15 +151,12 @@ struct MealSuggestionsView: View {
                                     steps: recipe.steps,
                                     tips: recipe.tips
                                 ),
-                                selectedMeal: $selectedRecipe
+                                selectedMeal: $selectedRecipe,
+                                onDelete: {
+                                    context.delete(recipe)
+                                }
                             )
                         }
-                        .onDelete { indexSet in
-                            for index in indexSet {
-                                context.delete(recipes[index])
-                            }
-                        }
-                        
                     }
                     .sheet(item: $selectedRecipe) { recipe in
                         FullMealView(recipe: recipe)
@@ -169,8 +166,10 @@ struct MealSuggestionsView: View {
                     Spacer()
                 }
                 .padding(.vertical)
+                .padding(.top, 1) // Minimal top padding
             }
         }
+        .ignoresSafeArea(.container, edges: .top)
     }
     
     private var preferenceChips: some View {
@@ -258,20 +257,34 @@ struct PostMeal: View {
     
     let meal: RecipeShow
     @Binding var selectedMeal: RecipeShow?
+    var onDelete: () -> Void
     
     @State private var isButtonPressed = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             
-            // Post Title & Description
-            Text(meal.name)
-                .font(.headline)
-                .foregroundColor(.black)
-            Text(meal.description)
-                .font(.subheadline)
-                .foregroundColor(.black)
-                .lineLimit(2)
+            // Post Title & Description & Delete Button
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(meal.name)
+                        .font(.headline)
+                        .foregroundColor(.black)
+                    Text(meal.description)
+                        .font(.subheadline)
+                        .foregroundColor(.black)
+                        .lineLimit(2)
+                }
+                Spacer()
+                Button(action: onDelete) {
+                    Image(systemName: "trash.fill")
+                        .font(.subheadline)
+                        .foregroundColor(.red)
+                        .padding(8)
+                        .background(Color.black.opacity(0.15))
+                        .clipShape(Circle())
+                }
+            }
             
             // Post Actions
             

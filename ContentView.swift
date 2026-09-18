@@ -3,26 +3,26 @@
 //
 
 import SwiftUI
-   
+
 //struct ContentView: View {
 //    @Environment(\.userSession) var user
-//    
+//
 //    var body: some View {
 //        NavigationStack {
 //            ZStack{
 //                Theme.backColor.ignoresSafeArea()
-//                
+//
 //                ScrollView {
 //                    VStack(spacing: 10) {
 //                        Theme.backColor.ignoresSafeArea()
-//                        
+//
 //                        // Greeting
 //                        Text("Welcome, \(user.name)")
 //                            .font(.largeTitle)
 //                            .bold()
 //                            .foregroundColor(Theme.primaryGreen)
 //                            .shadow(color: Theme.glowGreen.opacity(0.5), radius: 8)
-//                        
+//
 //                        // Feature Cards
 //                        FeatureCard(
 //                            title: "AI Recipe Generator",
@@ -31,7 +31,7 @@ import SwiftUI
 //                            isUnlocked: true
 //                        )
 //                        .cardStyle()
-//                        
+//
 //                        FeatureCard(
 //                            title: "Food Finder",
 //                            description: "Find Nutritious, Affordable, and Delicious Food In Your Local Community",
@@ -39,7 +39,7 @@ import SwiftUI
 //                            isUnlocked: true
 //                        )
 //                        .cardStyle()
-//                        
+//
 //                        FeatureCard(
 //                            title: "Community Board",
 //                            description: "Stay Updated on Local Food Drives and Events",
@@ -47,7 +47,7 @@ import SwiftUI
 //                            isUnlocked: user.accountType == "Premium"
 //                        )
 //                        .cardStyle()
-//                        
+//
 //                        FeatureCard(
 //                            title: "Food Scanner",
 //                            description: "Scan product labels for allergens and dietary conflicts.",
@@ -55,7 +55,7 @@ import SwiftUI
 //                            isUnlocked: user.accountType == "Premium"
 //                        )
 //                        .cardStyle()
-//                        
+//
 //                        Spacer()
 //                    }
 //                    .padding(.top, -25)
@@ -86,20 +86,20 @@ import SwiftUI
 // Second option
 //struct ContentView: View {
 //    @Environment(\.userSession) var user
-//    
+//
 //    var body: some View {
 //        NavigationStack {
 //            ZStack {
 //                Theme.backColor.ignoresSafeArea()
-//                
+//
 //                ScrollView {
 //                    VStack(spacing: 24) {
-//                        
+//
 //                        header
 //                        primaryFeature
 //                        featureGrid
 //                        premiumSection
-//                        
+//
 //                        Spacer(minLength: 40)
 //                    }
 //                    .padding()
@@ -107,13 +107,13 @@ import SwiftUI
 //            }
 //        }
 //    }
-//    
+//
 //    // MARK: - Header
 //    private var header: some View {
 //        VStack(alignment: .leading, spacing: 6) {
 //            Text("Welcome back,")
 //                .foregroundColor(.white.opacity(0.7))
-//            
+//
 //            Text(user.name)
 //                .font(.largeTitle)
 //                .bold()
@@ -122,22 +122,22 @@ import SwiftUI
 //        }
 //        .frame(maxWidth: .infinity, alignment: .leading)
 //    }
-//    
+//
 //    // MARK: - Primary Feature (AI Recipes)
 //    private var primaryFeature: some View {
 //        NavigationLink(destination: MealSuggestionsView()) {
 //            VStack(alignment: .leading, spacing: 12) {
-//                
+//
 //                HStack {
 //                    Image(systemName: "sparkles")
 //                        .font(.title)
 //                    Spacer()
 //                }
-//                
+//
 //                Text("AI Recipe Generator")
 //                    .font(.title2)
 //                    .bold()
-//                
+//
 //                Text("Create meals instantly based on what you have")
 //                    .font(.subheadline)
 //                    .opacity(0.8)
@@ -156,23 +156,23 @@ import SwiftUI
 //            .shadow(color: Theme.glowGreen.opacity(0.5), radius: 12)
 //        }
 //    }
-//    
+//
 //    // MARK: - Feature Grid
 //    private var featureGrid: some View {
 //        VStack(alignment: .leading, spacing: 12) {
-//            
+//
 //            Text("Explore")
 //                .font(.headline)
 //                .foregroundColor(.white.opacity(0.8))
-//            
+//
 //            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-//                
+//
 //                featureTile(
 //                    title: "Food Finder",
 //                    icon: "map.fill",
 //                    destination: FindView()
 //                )
-//                
+//
 //                featureTile(
 //                    title: "Scanner",
 //                    icon: "camera.fill",
@@ -181,15 +181,15 @@ import SwiftUI
 //            }
 //        }
 //    }
-//    
+//
 //    // MARK: - Premium Section
 //    private var premiumSection: some View {
 //        VStack(alignment: .leading, spacing: 12) {
-//            
+//
 //            Text("Premium")
 //                .font(.headline)
 //                .foregroundColor(.white.opacity(0.8))
-//            
+//
 //            featureTile(
 //                title: "Community Board",
 //                icon: "person.3.fill",
@@ -198,7 +198,7 @@ import SwiftUI
 //            )
 //        }
 //    }
-//    
+//
 //    // MARK: - Reusable Tile
 //    private func featureTile<Destination: View>(
 //        title: String,
@@ -206,18 +206,18 @@ import SwiftUI
 //        destination: Destination,
 //        locked: Bool = false
 //    ) -> some View {
-//        
+//
 //        NavigationLink(destination: destination) {
 //            VStack(spacing: 12) {
-//                
+//
 //                Image(systemName: icon)
 //                    .font(.title2)
-//                
+//
 //                Text(title)
 //                    .font(.subheadline)
 //                    .bold()
 //                    .multilineTextAlignment(.center)
-//                
+//
 //                if locked {
 //                    Text("Premium")
 //                        .font(.caption2)
@@ -264,8 +264,10 @@ struct ContentView: View {
                         Spacer(minLength: 30)
                     }
                     .padding()
+                    .padding(.top, 1) // Minimal top padding
                 }
             }
+            .ignoresSafeArea(.container, edges: .top)
             // --- Populate both on appear ---
             .onAppear {
                 greeting = timeBasedGreeting()

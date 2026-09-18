@@ -5,6 +5,7 @@
 // OLD LOGIN VIEWWWWW, NOW USING ONBOARDING VIEEWWWWW
 
 import SwiftUI
+import SwiftData
 import Combine
 struct LoginView: View {
     
@@ -16,43 +17,7 @@ struct LoginView: View {
     
     @State private var nameInput = ""
     @State private var usernameInput = ""
-    
-    @State private var selectedPreferences: [String] = []
-    @State private var searchText = ""
-    
-    let preferenceOptions = [
-        "Vegetarian",
-        "Vegan",
-        "Gluten-Free",
-        "Dairy-Free",
-        "Nut-Free",
-        "Peanut Allergy",
-        "Tree Nut Allergy",
-        "Egg-Free",
-        "Soy-Free",
-        "Shellfish Allergy",
-        "Fish Allergy",
-        "Sesame Allergy",
-        "Halal",
-        "Kosher",
-        "Low Sodium",
-        "Low Sugar",
-        "Low Carb",
-        "Keto",
-        "Paleo",
-        "High Protein",
-        "Diabetic Friendly"
-    ]
-    
-    var filteredPreferences: [String] {
-            if searchText.isEmpty {
-                return preferenceOptions
-            }
-
-            return preferenceOptions.filter {
-                $0.localizedCaseInsensitiveContains(searchText)
-            }
-        }
+    @State private var preferencesInput = ""
     
     @FocusState private var focusedName: String?
     @FocusState private var focusedUsername: String?
@@ -138,22 +103,7 @@ struct LoginView: View {
                                 .autocapitalization(.none)
                             
                             
-                            VStack(alignment: .leading) {
-                                
-                                Text("Dietary Preferences")
-                                    .font(.headline)
-                                    .foregroundColor(Theme.primaryGreen)
-                                    .padding(.horizontal)
-
-                                HStack {
-
-                                    Image(systemName: "magnifyingglass")
-                                        .foregroundColor(Theme.primaryGreen)
-
-                                    TextField("Search or add preference...", text: $searchText)
-                                        .foregroundColor(.white)
-
-                                }
+                            TextField("Food Preferences (comma-separated)", text: $preferencesInput)
                                 .padding()
                                 .background(
                                     RoundedRectangle(cornerRadius: 16)
@@ -167,126 +117,17 @@ struct LoginView: View {
                                                     lineWidth: 2
                                                 )
                                         )
+                                        .shadow(
+                                            color: focusedPreferences == "preferences"
+                                            ? Theme.primaryGreen.opacity(0.8)
+                                            : .clear,
+                                            radius: 10
+                                        )
                                 )
+                                .foregroundColor(.white)
+                                .tint(Theme.primaryGreen)
                                 .focused($focusedPreferences, equals: "preferences")
                                 .padding(.horizontal)
-
-                                ScrollView(.horizontal, showsIndicators: false) {
-
-                                    HStack {
-
-                                        ForEach(selectedPreferences, id: \.self) { preference in
-
-                                            HStack {
-
-                                                Text(preference)
-                                                    .foregroundColor(.black)
-                                                    .font(.subheadline.bold())
-
-                                                Button {
-
-                                                    selectedPreferences.removeAll {
-                                                        $0 == preference
-                                                    }
-
-                                                } label: {
-
-                                                    Image(systemName: "xmark.circle.fill")
-                                                        .foregroundColor(.black.opacity(0.7))
-
-                                                }
-
-                                            }
-
-                                            .padding(.horizontal,12)
-                                            .padding(.vertical,8)
-                                            .background(Theme.primaryGreen)
-                                            .cornerRadius(20)
-
-                                        }
-
-                                    }
-
-                                }
-
-                                if !filteredPreferences.isEmpty || !searchText.isEmpty {
-
-                                    VStack(spacing: 0) {
-
-                                        ForEach(filteredPreferences, id: \.self) { preference in
-
-                                            Button {
-
-                                                if !selectedPreferences.contains(preference) {
-                                                    selectedPreferences.append(preference)
-                                                }
-
-                                                searchText = ""
-
-                                            } label: {
-
-                                                HStack {
-
-                                                    Text(preference)
-                                                        .foregroundColor(.white)
-
-                                                    Spacer()
-
-                                                    Image(systemName: "plus.circle.fill")
-                                                        .foregroundColor(Theme.primaryGreen)
-
-                                                }
-                                                .padding()
-
-                                            }
-
-                                            Divider()
-                                                .background(Color.white.opacity(0.2))
-
-                                        }
-
-                                        // Allow custom entries
-                                        if !searchText.isEmpty &&
-                                            !preferenceOptions.contains(where: {
-                                                $0.localizedCaseInsensitiveCompare(searchText) == .orderedSame
-                                            }) {
-
-                                            Button {
-
-                                                selectedPreferences.append(searchText)
-                                                searchText = ""
-
-                                            } label: {
-
-                                                HStack {
-
-                                                    Image(systemName: "plus.circle.fill")
-                                                        .foregroundColor(Theme.primaryGreen)
-
-                                                    Text("Add \"\(searchText)\"")
-                                                        .foregroundColor(.white)
-
-                                                    Spacer()
-
-                                                }
-                                                .padding()
-
-                                            }
-
-                                        }
-
-                                    }
-                                    .frame(maxHeight: 220)
-                                    .background(Theme.lightGreen.opacity(0.25))
-                                    .clipShape(RoundedRectangle(cornerRadius: 15))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .stroke(Theme.primaryGreen.opacity(0.4), lineWidth: 1)
-                                    )
-                                    .padding(.horizontal)
-                                }
-                                
-                            }
                         }
                         
                         VStack(alignment: .leading) {
@@ -310,7 +151,7 @@ struct LoginView: View {
                         Button("Create Account") {
                             user.name = nameInput
                             user.username = usernameInput
-                            user.preferences = selectedPreferences.joined(separator: ", ")
+                            user.preferences = preferencesInput
                             user.accountType = selectedAccount
                             
                             user.selectedTab = .contentView
@@ -343,7 +184,6 @@ struct LoginView: View {
             
         }
 }
-
 
 
 

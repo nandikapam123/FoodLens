@@ -4,19 +4,44 @@
 
 import SwiftUI
 import AVFoundation
+
+enum ScanMode: String, CaseIterable {
+    case barcode = "Barcode"
+    case label = "Label (OCR)"
+}
+
 struct ScannerView: View {
-    
+
     @Environment(\.userSession) var user
-    
+
     @State private var showTip = true
-    
+    @State private var scanMode: ScanMode = .barcode
+
+    // OCR mode states
     @State private var showPicker = false
     @State private var capturedImage: UIImage?
-    
+
+    // Barcode mode states
+    @State private var showBarcodeScanner = false
+    @State private var showManualEntry = false
+    @State private var scannedBarcode: String?
+    @State private var productName: String = ""
+
+    // Check if running on simulator
+    private var isSimulator: Bool {
+        #if targetEnvironment(simulator)
+        return true
+        #else
+        return false
+        #endif
+    }
+
+    // Shared states
     @State private var scannedText: String = ""
     @State private var detectedMatches: [String] = []
     @State private var ingredientWords: [String] = []
-    
+    @State private var isLoadingProduct = false
+
     private let speechSynthesizer = AVSpeechSynthesizer()
     @State private var selectedCategory: IngredientCategory = .veg
     @State private var isScanButtonPressed = false
@@ -25,41 +50,86 @@ struct ScannerView: View {
         ZStack {
             Theme.backColor.ignoresSafeArea()
             ScrollView{
-                
+
                 VStack(spacing: 28) {
                     titleView
                         .padding(.bottom, -20)
-                        .padding(.top, 10)
+                        .padding(.top, 1) // Minimal top padding
                     scanControlsBox
-                    if capturedImage != nil { resultsBox }
+
+                    // Show results if we have OCR image or barcode scan data
+                    if capturedImage != nil || (scannedBarcode != nil && !scannedText.isEmpty && scannedText != "Loading...") {
+                        resultsBox
+                    }
+
                     if showTip {tipBox}
                     Spacer()
                 }
             }
         }
+        .ignoresSafeArea(.container, edges: .top)
         .sheet(isPresented: $showPicker) {
             CameraOrPhotoPicker { (image: UIImage) in
                 capturedImage = image
                 scanImage(image)
             }
         }
+        .sheet(isPresented: $showBarcodeScanner) {
+            BarcodeScannerView(isPresented: $showBarcodeScanner) { barcode in
+                handleBarcodeScanned(barcode)
+            }
+        }
+        .sheet(isPresented: $showManualEntry) {
+            ManualBarcodeEntryView(isPresented: $showManualEntry) { barcode in
+                handleBarcodeScanned(barcode)
+            }
+        }
     }
         
     private var titleView: some View {
-        PageHeader(
-            title: "Food Scanner",
-            subtitle: "Take a photo of any ingredient label and instantly find out if it fits your dietary needs, from gluten-free to halal."
-        )
+        VStack(spacing: 12) {
+            PageHeader(
+                title: "Food Scanner",
+                subtitle: scanMode == .barcode
+                    ? "Scan product barcodes for instant ingredient analysis"
+                    : "Take a photo of any ingredient label and instantly find out if it fits your dietary needs"
+            )
+
+            // Scan mode toggle
+            Picker("Scan Mode", selection: $scanMode) {
+                ForEach(ScanMode.allCases, id: \.self) { mode in
+                    Text(mode.rawValue).tag(mode)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding(.horizontal)
+            .onChange(of: scanMode) {
+                clearScreen()
+            }
+        }
     }
     
     private var scanControlsBox: some View {
-        DarkCard{
-            Text("Select Category to Scan For")
-                .font(.headline)
-                .foregroundColor(Theme.primaryGreen)
-                .padding(.top, 10)
-            categoryPicker
-            scanButton
+        DarkCard {
+            if isLoadingProduct {
+                VStack(spacing: 16) {
+                    ProgressView()
+                        .tint(Theme.primaryGreen)
+                        .scaleEffect(1.5)
+                    Text("Fetching product data...")
+                        .foregroundColor(.white.opacity(0.7))
+                        .font(.subheadline)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 50)
+            } else {
+                Text("Select Category to Scan For")
+                    .font(.headline)
+                    .foregroundColor(Theme.primaryGreen)
+                    .padding(.top, 10)
+                categoryPicker
+                scanButton
+            }
         }
         .padding()
     }
@@ -81,7 +151,7 @@ struct ScannerView: View {
                 Text("Added Sugars").tag(IngredientCategory.added_sugars_free)
             }
         }
-        .onChange(of: selectedCategory) { (_ newCategory: IngredientCategory) in
+        .onChange(of: selectedCategory) {
             clearScreen()
         }
         .pickerStyle(.wheel)
@@ -94,19 +164,37 @@ struct ScannerView: View {
     }
     
     private var scanButton: some View {
-        Button(action: { showPicker = true }) {
-            Label("Scan / Select Photo", systemImage: "camera")
-                .font(.custom("Verdana", size: 18))
-                .frame(maxWidth: .infinity)
-                .padding()
-                .bold()
-                .foregroundColor(Theme.backColor)
-                .background(
-                    Theme.greenGradient
-                        .cornerRadius(14)
-                        .shadow(color: Theme.glowGreen.opacity(isScanButtonPressed ? 0.8 : 0.5), radius: 12)
-                )
-                .scaleEffect(isScanButtonPressed ? 0.95 : 1.0)
+        Button(action: {
+            if scanMode == .barcode {
+                // Use manual entry on simulator, camera on real device
+                if isSimulator {
+                    showManualEntry = true
+                } else {
+                    showBarcodeScanner = true
+                }
+            } else {
+                showPicker = true
+            }
+        }) {
+            Label(
+                scanMode == .barcode
+                    ? (isSimulator ? "Enter Barcode (Simulator)" : "Scan Barcode")
+                    : "Scan / Select Photo",
+                systemImage: scanMode == .barcode
+                    ? (isSimulator ? "keyboard" : "barcode.viewfinder")
+                    : "camera"
+            )
+            .font(.custom("Verdana", size: 18))
+            .frame(maxWidth: .infinity)
+            .padding()
+            .bold()
+            .foregroundColor(Theme.backColor)
+            .background(
+                Theme.greenGradient
+                    .cornerRadius(14)
+                    .shadow(color: Theme.glowGreen.opacity(isScanButtonPressed ? 0.8 : 0.5), radius: 12)
+            )
+            .scaleEffect(isScanButtonPressed ? 0.95 : 1.0)
         }
         .padding(.horizontal)
         .simultaneousGesture(
@@ -177,12 +265,12 @@ struct ScannerView: View {
     }
     
     private var ingredientsList: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Ingredients Detected:")
                 .font(.headline)
                 .foregroundStyle(Theme.primaryGreen)
                 .multilineTextAlignment(.leading)
-            
+
             if !ingredientWords.isEmpty {
                 ScrollView {
                     Text(buildHighlightedIngredientsText())
@@ -199,6 +287,30 @@ struct ScannerView: View {
                         }
                 }
                 .frame(maxHeight: 250)
+            } else if !scannedText.isEmpty && scannedText != "Loading..." {
+                // Show raw text if parsing failed or returned empty
+                ScrollView {
+                    Text(scannedText)
+                        .font(.subheadline)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.leading)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.black.opacity(0.25))
+                        )
+                }
+                .frame(maxHeight: 250)
+            } else {
+                Text("No ingredients information available")
+                    .font(.subheadline)
+                    .foregroundColor(.white.opacity(0.6))
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.black.opacity(0.25))
+                    )
             }
         }
     }
@@ -289,6 +401,105 @@ struct ScannerView: View {
         detectedMatches = []
         ingredientWords = []
         capturedImage = nil
+        scannedBarcode = nil
+        productName = ""
+    }
+
+    private func handleBarcodeScanned(_ barcode: String) {
+        scannedBarcode = barcode
+        isLoadingProduct = true
+
+        // Show loading state
+        scannedText = "Loading..."
+        ingredientWords = []
+        detectedMatches = []
+
+        // Fetch from Open Food Facts API
+        OpenFoodFactsService.shared.fetchProduct(barcode: barcode) { result in
+            DispatchQueue.main.async {
+                self.isLoadingProduct = false
+
+                switch result {
+                case .success(let product):
+                    // Update product name with brand
+                    self.productName = product.name
+                    if let brand = product.brand, !brand.isEmpty {
+                        self.productName = "\(product.name) - \(brand)"
+                    }
+
+                    // Use ingredients text from API
+                    self.scannedText = product.ingredients.isEmpty
+                        ? "No ingredients information available for this product."
+                        : product.ingredients
+
+                    // Parse ingredients into words (same as OCR)
+                    if !product.ingredients.isEmpty {
+                        self.ingredientWords = product.ingredients
+                            .components(separatedBy: CharacterSet(charactersIn: ",\n"))
+                            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                            .filter { !$0.isEmpty }
+                    } else {
+                        self.ingredientWords = []
+                    }
+
+                    // Run ingredient matching against selected category
+                    self.detectedMatches = IngredientScanner.matchKeywords(
+                        in: product.ingredients,
+                        category: self.selectedCategory
+                    )
+
+                    // Save to scan history
+                    self.user.addScan(category: self.selectedCategory, matches: self.detectedMatches)
+
+                    // Show results (set capturedImage to trigger resultsBox display)
+                    // Since we don't have an actual image, we'll rely on scannedText being populated
+
+                    print("✅ Product: \(product.name)")
+                    print("📦 Brand: \(product.brand ?? "none")")
+                    print("📝 Ingredients text length: \(product.ingredients.count) characters")
+                    if !product.ingredients.isEmpty {
+                        print("📝 Ingredients (first 100 chars): \(product.ingredients.prefix(100))...")
+                        print("📝 Parsed words count: \(self.ingredientWords.count)")
+                        if self.ingredientWords.count > 0 {
+                            print("📝 First few words: \(self.ingredientWords.prefix(5).joined(separator: ", "))")
+                        }
+                    } else {
+                        print("⚠️ Ingredients text is EMPTY")
+                    }
+                    print("⚠️ Detected matches: \(self.detectedMatches)")
+                    print("🎯 scannedText: \(self.scannedText.prefix(100))...")
+
+                case .failure(let error):
+                    // Handle different error types with user-friendly messages
+                    self.productName = "Error"
+
+                    switch error {
+                    case .productNotFound:
+                        self.scannedText = "Product not found in database.\n\nTry:\n• Scanning from a different angle\n• Using OCR mode for the ingredients label"
+                        self.ingredientWords = ["Product", "not", "found"]
+
+                    case .rateLimitExceeded:
+                        self.scannedText = "Too many scans in a short time.\n\nPlease wait a few seconds and try again."
+                        self.ingredientWords = ["Rate", "limit", "exceeded"]
+
+                    case .networkError:
+                        self.scannedText = "No internet connection.\n\nPlease check your network and try again.\n\nTip: Use OCR mode to scan offline!"
+                        self.ingredientWords = ["Network", "error"]
+
+                    case .invalidBarcode:
+                        self.scannedText = "Invalid barcode format.\n\nTry scanning again or use OCR mode."
+                        self.ingredientWords = ["Invalid", "barcode"]
+
+                    default:
+                        self.scannedText = "Error loading product.\n\n\(error.localizedDescription)\n\nTry using OCR mode instead."
+                        self.ingredientWords = ["Error"]
+                    }
+
+                    self.detectedMatches = []
+                    print("❌ Error fetching product: \(error.localizedDescription)")
+                }
+            }
+        }
     }
     
     private func scanImage(_ image: UIImage) {

@@ -37,9 +37,9 @@ extension RecipeEntity {
         self.init(
             name: recipe.name,
             recipeDescription: recipe.description,
-            ingredients: recipe.ingredients!,
-            steps: recipe.steps!,
-            tips: recipe.tips!,
+            ingredients: recipe.ingredients ?? [],
+            steps: recipe.steps ?? [],
+            tips: recipe.tips ?? []
         )
     }
 }

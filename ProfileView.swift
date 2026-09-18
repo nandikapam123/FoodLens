@@ -145,7 +145,7 @@ struct InfoRow: View {
 }
 // MARK: - Example Preferences Editor
 struct PreferencesEditorView: View {
-    @State var user: UserSession
+    var user: UserSession
     @Environment(\.dismiss) var dismiss
     @State private var tempPreferences: String = ""
     

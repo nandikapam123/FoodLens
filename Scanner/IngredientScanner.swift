@@ -43,6 +43,24 @@ struct IngredientScanner {
         let range = NSRange(text.startIndex..., in: text)
         return regex.firstMatch(in: text, options: [], range: range) != nil
     }
+
+    // MARK: - Helper for Barcode Scanner
+
+    /// Match keywords from a specific category in plain text (for API responses)
+    static func matchKeywords(in text: String, category: IngredientCategory) -> [String] {
+        let keywords = category.keywords
+        let lowercasedText = text.lowercased()
+
+        var matches: [String] = []
+
+        for keyword in keywords {
+            if containsWholeWord(keyword, in: lowercasedText) {
+                matches.append(keyword)
+            }
+        }
+
+        return Array(Set(matches)).sorted() // Remove duplicates and sort
+    }
 }
 
 

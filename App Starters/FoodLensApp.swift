@@ -10,15 +10,14 @@ struct FoodLensApp: App {
     @State var user = UserSession()
     var body: some Scene {
         WindowGroup {
-            Group{
-                if isLoggedIn {
-                    Start()
-                } else {
-                    SplashView()
-                        .modelContainer(for: RecipeEntity.self)
-                }
+            if isLoggedIn {
+                Start()
+                    .environment(\.userSession, user)
+            } else {
+                SplashView()
+                    .environment(\.userSession, user)
             }
-            .environment(\.userSession, user)
         }
+        .modelContainer(for: RecipeEntity.self)
     }
 }
