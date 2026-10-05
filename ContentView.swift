@@ -264,10 +264,9 @@ struct ContentView: View {
                         Spacer(minLength: 30)
                     }
                     .padding()
-                    .padding(.top, 1) // Minimal top padding
+                    .padding(.top, 20)
                 }
             }
-            .ignoresSafeArea(.container, edges: .top)
             // --- Populate both on appear ---
             .onAppear {
                 greeting = timeBasedGreeting()

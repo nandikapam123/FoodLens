@@ -29,7 +29,7 @@ struct ProfileView: View {
                             .background(Theme.lightGreen.opacity(0.2))
                             .cornerRadius(16)
                             .padding(.horizontal)
-                            .padding(.top, -40)
+                            .padding(.top, 10)
                         
                         // 1. Profile Header
                         VStack(spacing: 8) {
@@ -143,52 +143,196 @@ struct InfoRow: View {
         .padding()
     }
 }
-// MARK: - Example Preferences Editor
+// MARK: - Preferences Editor
 struct PreferencesEditorView: View {
-    var user: UserSession
-    @Environment(\.dismiss) var dismiss
-    @State private var tempPreferences: String = ""
-    
+    let user: UserSession
+
+    @Environment(\.dismiss) private var dismiss
+    @State private var selectedPreferences: [String] = []
+    @State private var searchText = ""
+
+    private let preferenceOptions = [
+        "Vegetarian",
+        "Vegan",
+        "Gluten-Free",
+        "Dairy-Free",
+        "Nut-Free",
+        "Peanut Allergy",
+        "Tree Nut Allergy",
+        "Egg-Free",
+        "Soy-Free",
+        "Shellfish Allergy",
+        "Fish Allergy",
+        "Sesame Allergy",
+        "Halal",
+        "Kosher",
+        "Low Sodium",
+        "Low Sugar",
+        "Low Carb",
+        "Keto",
+        "Paleo",
+        "Mediterranean",
+        "High Protein",
+        "Diabetic Friendly"
+    ]
+
+    private var filteredPreferences: [String] {
+        guard !searchText.isEmpty else {
+            return []
+        }
+
+        return preferenceOptions
+            .filter { !selectedPreferences.contains($0) }
+            .filter { $0.localizedCaseInsensitiveContains(searchText) }
+    }
+
+    private var customPreference: String? {
+        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard !trimmedSearchText.isEmpty,
+              !preferenceOptions.contains(where: {
+                  $0.localizedCaseInsensitiveCompare(trimmedSearchText) == .orderedSame
+              }),
+              !selectedPreferences.contains(where: {
+                  $0.localizedCaseInsensitiveCompare(trimmedSearchText) == .orderedSame
+              }) else {
+            return nil
+        }
+
+        return trimmedSearchText
+    }
+
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
-                
-                Text("Edit Preferences")
-                    .font(.title2.bold())
-                    .padding(.top)
-                
-                TextField("Enter preferences", text: $tempPreferences)
-                    .textFieldStyle(.roundedBorder)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("Edit Preferences")
+                        .font(.title2.bold())
+
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundStyle(Theme.primaryGreen)
+
+                        TextField("Search or add preference...", text: $searchText)
+                            .textInputAutocapitalization(.words)
+                    }
                     .padding()
-                    .onAppear {
-                        tempPreferences = user.preferences
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Theme.lightGreen.opacity(0.25))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Theme.primaryGreen.opacity(0.4), lineWidth: 1)
+                    )
+
+                    if !selectedPreferences.isEmpty {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(selectedPreferences, id: \.self) { preference in
+                                    HStack(spacing: 6) {
+                                        Text(preference)
+                                            .font(.subheadline.bold())
+
+                                        Button {
+                                            selectedPreferences.removeAll { $0 == preference }
+                                        } label: {
+                                            Image(systemName: "xmark.circle.fill")
+                                        }
+                                        .accessibilityLabel("Remove \(preference)")
+                                    }
+                                    .foregroundStyle(Theme.backColor)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 8)
+                                    .background(Theme.primaryGreen)
+                                    .clipShape(Capsule())
+                                }
+                            }
+                        }
                     }
-                
-                Button("Save") {
-                    user.preferences = tempPreferences
-                    dismiss()
-                }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Theme.backColor)
-                .foregroundColor(.white)
-                .cornerRadius(12)
-                
-                Spacer()
-            }
-            .padding()
-            
-            // Back button in navigation bar
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
+
+                    if !searchText.isEmpty {
+                        VStack(spacing: 0) {
+                            ForEach(filteredPreferences, id: \.self) { preference in
+                                preferenceButton(preference)
+                            }
+
+                            if let customPreference {
+                                Button {
+                                    addPreference(customPreference)
+                                } label: {
+                                    HStack {
+                                        Image(systemName: "plus.circle.fill")
+                                            .foregroundStyle(Theme.primaryGreen)
+                                        Text("Add \"\(customPreference)\"")
+                                        Spacer()
+                                    }
+                                    .padding()
+                                }
+                            }
+                        }
+                        .foregroundStyle(.primary)
+                        .background(Theme.lightGreen.opacity(0.18))
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Theme.primaryGreen.opacity(0.35), lineWidth: 1)
+                        )
+                    }
+
+                    Button("Save") {
+                        user.preferences = selectedPreferences.joined(separator: ", ")
                         dismiss()
-                    } label: {
-                        Label("Back", systemImage: "chevron.left")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Theme.backColor)
+                    .foregroundStyle(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+                .padding()
+            }
+            .navigationTitle("Your Preferences")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
                     }
                 }
+            }
+            .onAppear {
+                selectedPreferences = user.preferences
+                    .split(separator: ",")
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { !$0.isEmpty }
             }
         }
+    }
+
+    private func preferenceButton(_ preference: String) -> some View {
+        Button {
+            addPreference(preference)
+        } label: {
+            HStack {
+                Text(preference)
+                Spacer()
+                Image(systemName: "plus.circle.fill")
+                    .foregroundStyle(Theme.primaryGreen)
+            }
+            .padding()
+        }
+    }
+
+    private func addPreference(_ preference: String) {
+        guard !selectedPreferences.contains(where: {
+            $0.localizedCaseInsensitiveCompare(preference) == .orderedSame
+        }) else {
+            return
+        }
+
+        selectedPreferences.append(preference)
+        searchText = ""
     }
 }
 

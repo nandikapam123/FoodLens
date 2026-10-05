@@ -22,29 +22,41 @@ struct MapResultsView: View {
     @State private var region: MKCoordinateRegion
     @State private var selectedFilter: PlaceFilter = .all
     @State private var selectedLocation: PantryLocation?
+    @State private var liveLocations: [PantryLocation] = []
+    @State private var isSearching = false
+    @State private var searchMessage: String?
 
-    let allLocations: [PantryLocation]
+    private let verifiedLocations: [PantryLocation]
 
     init(center: CLLocationCoordinate2D, user: UserSession) {
         self.user = user
-        self.allLocations = pantryLocations
+        self.verifiedLocations = pantryLocations
         _region = State(initialValue: MKCoordinateRegion(
             center: center,
-            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
         ))
     }
 
 
+    private var nearbyLocations: [PantryLocation] {
+        let center = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
+
+        return deduplicated(verifiedLocations + liveLocations).filter {
+            CLLocation(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude)
+                .distance(from: center) < 25_000
+        }
+    }
+
     var filteredLocations: [PantryLocation] {
         switch selectedFilter {
-        case .all:        return allLocations.filter { isAccessible($0) }
-        case .grocery:    return allLocations.filter { $0.type.lowercased() == "grocery" }
-        case .pantry:     return allLocations.filter { $0.type.lowercased() == "pantry" }
-        case .vegetarian: return allLocations.filter { $0.type.lowercased() == "vegetarian" }
-        case .vegan:      return allLocations.filter { $0.type.lowercased() == "vegan" }
-        case .halal:      return isPremium ? allLocations.filter { $0.type.lowercased() == "halal" } : []
-        case .kosher:     return isPremium ? allLocations.filter { $0.type.lowercased() == "kosher" } : []
-        case .glutenFree: return isPremium ? allLocations.filter { $0.type.lowercased() == "gluten-free" } : []
+        case .all:        return nearbyLocations.filter { isAccessible($0) }
+        case .grocery:    return nearbyLocations.filter { $0.type.lowercased() == "grocery" }
+        case .pantry:     return nearbyLocations.filter { $0.type.lowercased() == "pantry" }
+        case .vegetarian: return nearbyLocations.filter { $0.type.lowercased() == "vegetarian" }
+        case .vegan:      return nearbyLocations.filter { $0.type.lowercased() == "vegan" }
+        case .halal:      return isPremium ? nearbyLocations.filter { $0.type.lowercased() == "halal" } : []
+        case .kosher:     return isPremium ? nearbyLocations.filter { $0.type.lowercased() == "kosher" } : []
+        case .glutenFree: return isPremium ? nearbyLocations.filter { $0.type.lowercased() == "gluten-free" } : []
         }
     }
 
@@ -57,9 +69,10 @@ struct MapResultsView: View {
 
     private var nearby: [PantryLocation] {
         let center = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
-        return allLocations.filter {
+
+        return filteredLocations.filter {
             CLLocation(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude)
-                .distance(from: center) < 3200
+                .distance(from: center) < 15_000
         }
     }
 
@@ -88,7 +101,7 @@ struct MapResultsView: View {
             
             VStack(spacing: 20) {
                 header
-                    .padding(.top, -15)
+                    .padding(.top, 8)
                 mapView
                 filterChips
                     
@@ -113,6 +126,9 @@ struct MapResultsView: View {
         .onAppear {
             user.hideTabBar = true
         }
+        .task {
+            await searchNearbyPlaces()
+        }
         .onDisappear {
             user.hideTabBar = false
         }
@@ -126,7 +142,7 @@ struct MapResultsView: View {
                 .font(.system(size: 32, weight: .bold))
                 .foregroundStyle(Theme.primaryGreen)
                 .shadow(color: Theme.glowGreen.opacity(0.6), radius: 10)
-            Text("Based on your ZIP code")
+            Text(resultSummary)
                 .font(.subheadline)
                 .foregroundColor(.white.opacity(0.45))
         }
@@ -259,6 +275,14 @@ struct MapResultsView: View {
                             .foregroundColor(.white)
                     }
                 }
+                .accessibilityLabel("\(location.name), \(location.type)")
+            }
+        }
+        .overlay {
+            if isSearching {
+                ProgressView("Finding nearby food…")
+                    .padding()
+                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
             }
         }
         .cornerRadius(20)
@@ -361,6 +385,104 @@ struct MapResultsView: View {
             Text(text)
                 .font(.caption)
                 .foregroundColor(.white.opacity(0.6))
+        }
+    }
+
+    // MARK: - Live Search
+
+    @MainActor
+    private func searchNearbyPlaces() async {
+        isSearching = true
+        searchMessage = nil
+        defer { isSearching = false }
+
+        var queries: [(text: String, type: String)] = [
+            ("grocery store", "grocery"),
+            ("supermarket", "grocery"),
+            ("food pantry", "pantry"),
+            ("vegetarian restaurant", "vegetarian"),
+            ("vegan restaurant", "vegan")
+        ]
+
+        if isPremium {
+            queries += [
+                ("halal restaurant", "halal"),
+                ("kosher restaurant", "kosher"),
+                ("gluten free restaurant", "gluten-free")
+            ]
+        }
+
+        var searchResults: [PantryLocation] = []
+        var successfulSearches = 0
+
+        for query in queries {
+            guard !Task.isCancelled else {
+                return
+            }
+
+            let searchRegion = MKCoordinateRegion(
+                center: region.center,
+                span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3)
+            )
+            let request = MKLocalSearch.Request(
+                naturalLanguageQuery: query.text,
+                region: searchRegion
+            )
+            request.resultTypes = .pointOfInterest
+
+            do {
+                let response = try await MKLocalSearch(request: request).start()
+                successfulSearches += 1
+                searchResults += response.mapItems.compactMap { item in
+                    guard let name = item.name else {
+                        return nil
+                    }
+
+                    return PantryLocation(
+                        name: name,
+                        type: query.type,
+                        address: item.address?.fullAddress ?? "Address unavailable",
+                        hours: "Check Maps for current hours",
+                        coordinate: item.location.coordinate
+                    )
+                }
+            } catch {
+                continue
+            }
+        }
+
+        liveLocations = deduplicated(searchResults)
+
+        if liveLocations.isEmpty {
+            searchMessage = successfulSearches == 0
+                ? "Live search unavailable. Showing verified locations."
+                : "No live places found nearby."
+        }
+    }
+
+    private var resultSummary: String {
+        if isSearching {
+            return "Searching for nearby places…"
+        }
+
+        if let searchMessage {
+            return searchMessage
+        }
+
+        return "\(filteredLocations.count) nearby places found"
+    }
+
+    private func deduplicated(_ locations: [PantryLocation]) -> [PantryLocation] {
+        var seen = Set<String>()
+
+        return locations.filter { location in
+            let key = [
+                location.name.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: .current),
+                String(format: "%.4f", location.coordinate.latitude),
+                String(format: "%.4f", location.coordinate.longitude)
+            ].joined(separator: "|")
+
+            return seen.insert(key).inserted
         }
     }
 

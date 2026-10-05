@@ -54,7 +54,7 @@ struct ScannerView: View {
                 VStack(spacing: 28) {
                     titleView
                         .padding(.bottom, -20)
-                        .padding(.top, 1) // Minimal top padding
+                        .padding(.top, 20)
                     scanControlsBox
 
                     // Show results if we have OCR image or barcode scan data
@@ -67,7 +67,6 @@ struct ScannerView: View {
                 }
             }
         }
-        .ignoresSafeArea(.container, edges: .top)
         .sheet(isPresented: $showPicker) {
             CameraOrPhotoPicker { (image: UIImage) in
                 capturedImage = image

@@ -45,7 +45,7 @@ struct FindView: View {
                 ScrollView {
                     VStack(spacing: 20) {
                         header
-                            .padding(.top, 1)
+                            .padding(.top, 20)
                         zipField
                             .padding()
                             .padding(.bottom, -30)
@@ -69,7 +69,6 @@ struct FindView: View {
                 }
             }
         }
-        .ignoresSafeArea(.container, edges: .top)
     }
 
     // MARK: - Subviews

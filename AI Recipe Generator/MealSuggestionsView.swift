@@ -166,10 +166,9 @@ struct MealSuggestionsView: View {
                     Spacer()
                 }
                 .padding(.vertical)
-                .padding(.top, 1) // Minimal top padding
+                .padding(.top, 20)
             }
         }
-        .ignoresSafeArea(.container, edges: .top)
     }
     
     private var preferenceChips: some View {
